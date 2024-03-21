@@ -52,7 +52,7 @@ const SidebarFilter = () => {
           <AccordionContent>
             <div className="flex flex-col space-y-2">
               {seasons.map((season, index) => (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2" key={index}>
                   <Checkbox id={season.id} />
                   <label
                     htmlFor="terms2"
