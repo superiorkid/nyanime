@@ -1,9 +1,9 @@
+import Footer from "@/components/footer";
 import Navigation from "@/components/navigation";
+import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Next Anime | Your anime website preference",
@@ -19,24 +19,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "relative text-background bg-foreground",
+          "text-background bg-foreground relative",
           GeistSans.className
         )}
       >
-        <section className="absolute top-0 left-0 w-full h-[85dvh] -z-30">
-          <Image
-            fill
-            priority
-            src="https://images.unsplash.com/photo-1625895197185-efcec01cffe0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="background image"
-            className="object-cover brightness-50 saturate-50"
-            decoding="async"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </section>
-
         <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

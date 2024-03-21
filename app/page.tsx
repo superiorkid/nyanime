@@ -1,3 +1,4 @@
+import AnimeTopWallpaper from "@/components/anime-top-wallpaper";
 import Container from "@/components/container";
 import FeaturedCollectionSection from "@/components/featured-collection-section";
 import ForYouSection from "@/components/for-you-section";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <main>
       <Container>
+        <AnimeTopWallpaper />
         <Hero />
         <ForYouSection />
         <FeaturedCollectionSection />

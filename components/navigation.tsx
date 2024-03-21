@@ -5,15 +5,13 @@ import { Button } from "./ui/button";
 
 const Navigation = () => {
   return (
-    <header className="border-b border-zinc-200 py-3 bg-transparent">
+    <header className="border-b border-zinc-500 py-3 bg-transparent">
       <Container className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div>
-            <h1 className="font-bold text-4xl font-sans">next-anime</h1>
+            <h1 className="font-bold text-3xl font-sans">next-anime</h1>
           </div>
-          <div>
-            <Menu />
-          </div>
+          <Menu />
         </div>
         <div className="flex space-x-2 items-center">
           <Button
