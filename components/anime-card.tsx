@@ -1,17 +1,28 @@
-import React from "react";
-import Image from "next/image";
-import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import { Card, CardContent } from "./ui/card";
 
-const AnimeCard = () => {
+interface AnimeCardProps {
+  title: string;
+  releasedYear: number;
+  genre: string;
+  image_url: string;
+}
+
+const AnimeCard = ({
+  genre,
+  releasedYear,
+  title,
+  image_url,
+}: AnimeCardProps) => {
   return (
     <Card className="overflow-hidden border-0 group/card rounded-2xl">
       <CardContent className="p-0 m-0 rounded-2xl">
         <div className="relative h-[278px] w-full">
           <Image
             fill
-            src="https://static.wikia.nocookie.net/chainsaw-man/images/0/0f/Volume_01.png/revision/latest/scale-to-width-down/1000?cb=20230907225315"
+            src={image_url}
             alt={`card image`}
             className="object-cover hover:scale-105 transition-all duration-300 brightness-75 hover:brightness-100"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -35,8 +46,10 @@ const AnimeCard = () => {
           </div>
 
           <div className="absolute bottom-0 left-0 m-2 text-background text-sm group-hover/card:hidden">
-            <h3 className="font-medium">Tokyo Revengers</h3>
-            <p>2021, Action</p>
+            <h3 className="font-semibold">{title}</h3>
+            <p className="text-xs">
+              {releasedYear}, {genre}
+            </p>
           </div>
         </div>
       </CardContent>
