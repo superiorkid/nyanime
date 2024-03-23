@@ -21,6 +21,7 @@ export default async function Home() {
           imageUrl={forYouSelection.data.at(0)?.images.webp.large_image_url!}
         />
         <Hero
+          malId={forYouSelection.data.at(0)?.mal_id!}
           title={forYouSelection.data.at(0)?.title!}
           synopsis={forYouSelection.data.at(0)?.synopsis!}
         />

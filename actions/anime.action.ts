@@ -2,6 +2,7 @@
 
 import { Anime, Data } from "@/types/Anime";
 import { Characters } from "@/types/Character";
+import { Picture } from "@/types/Picture";
 import { Reviews } from "@/types/Reviews";
 import { Staff } from "@/types/Staff";
 
@@ -184,6 +185,30 @@ export async function getAnimeReview(malId: number) {
     }
 
     return data as Reviews;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime reviews");
+  }
+}
+
+export async function getAnimePictures(malId: number) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL + `/anime/${malId}/pictures`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as Picture;
   } catch (error) {
     console.error(error);
     throw new Error("something went wrong. Failed to get anime reviews");

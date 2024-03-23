@@ -22,7 +22,7 @@ const AnimeCard = ({
   return (
     <Card className="overflow-hidden border-0 group/card rounded-2xl">
       <CardContent className="p-0 m-0 rounded-2xl">
-        <Link href={`/anime/${malId}`}>
+        <Link href={`/anime/${malId}`} scroll>
           <div className="relative h-[278px] w-full">
             <Image
               fill
