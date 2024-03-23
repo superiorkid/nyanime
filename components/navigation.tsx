@@ -2,6 +2,9 @@ import React from "react";
 import Container from "@/components/container";
 import Menu from "@/components/menu";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Search } from "lucide-react";
+import SearchBar from "./search-bar";
 
 const Navigation = () => {
   return (
@@ -14,6 +17,7 @@ const Navigation = () => {
           <Menu />
         </div>
         <div className="flex space-x-2 items-center">
+          <SearchBar />
           <Button
             variant="secondary"
             size="lg"

@@ -1,6 +1,7 @@
 "use server";
 
 import { Anime, Data } from "@/types/Anime";
+import { AnimeSearch } from "@/types/AnimeSearch";
 import { Characters } from "@/types/Character";
 import { Picture } from "@/types/Picture";
 import { Reviews } from "@/types/Reviews";
@@ -181,6 +182,7 @@ export async function getAnimeReview(malId: number) {
     const data = await res.json();
 
     if (res.status !== 200) {
+      5;
       throw new Error(data);
     }
 
@@ -212,5 +214,92 @@ export async function getAnimePictures(malId: number) {
   } catch (error) {
     console.error(error);
     throw new Error("something went wrong. Failed to get anime reviews");
+  }
+}
+
+interface getAnimeSearchProps {
+  sfw?: boolean;
+  unapproved?: boolean;
+  page?: number;
+  limit?: number;
+  q?: string;
+  type?:
+    | "tv"
+    | "movie"
+    | "ova"
+    | "special"
+    | "ona"
+    | "music"
+    | "cm"
+    | "pv"
+    | "tv_special";
+  score?: number;
+  min_score?: number;
+  max_score?: number;
+  status?: "airing" | "complete" | "upcoming";
+  rating?: "g" | "pg" | "pg13" | "r17" | "r" | "rx";
+  genres?: string;
+  genres_exclude?: string;
+  order_by?:
+    | "mal_id"
+    | "title"
+    | "start_date"
+    | "end_date"
+    | "episodes"
+    | "score"
+    | "scored_by"
+    | "rank"
+    | "popularity"
+    | "members"
+    | "favorites";
+  sort_by?: "desc" | "asc";
+  letter?: string;
+  producers?: string;
+  start_date?: string;
+  end_date?: string;
+}
+
+export async function getAnimeSearch({
+  end_date,
+  genres,
+  genres_exclude,
+  letter,
+  limit,
+  max_score,
+  min_score,
+  order_by,
+  page,
+  producers,
+  q,
+  rating,
+  score,
+  sfw = false,
+  sort_by,
+  start_date,
+  status,
+  type,
+  unapproved = false,
+}: getAnimeSearchProps) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL +
+        `/anime?sfw=${sfw}&unapproved=${unapproved}&type=${type}&status=${status}&start_date=${start_date}&sort_by=${sort_by}&score=${score}&rating=${rating}&q=${q}&producers=${producers}&page=${page}&order_by=${order_by}&min_score=${min_score}&max_score=${max_score}&limit=${limit}&letter=${letter}&genres_exclude=${genres_exclude}&genres=${genres}&end_date=${end_date}`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as AnimeSearch;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime search");
   }
 }
