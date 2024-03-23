@@ -18,6 +18,7 @@ const MostPopularSection = ({ collections }: MostPopularSectionProps) => {
           {collections.map((anime, index) => (
             <AnimeCard
               key={index}
+              malId={anime.mal_id}
               genre={anime.genres.at(0)?.name!}
               image_url={anime.images.webp.large_image_url}
               releasedYear={anime.year!}

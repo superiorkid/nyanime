@@ -28,6 +28,7 @@ const TrendingNowSection = ({ collections }: TrendingNowSectionProps) => {
             {collections.map((anime, index) => (
               <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/6">
                 <AnimeCard
+                  malId={anime.mal_id}
                   title={anime.title}
                   releasedYear={anime.year!}
                   genre={anime.genres.at(0)?.name!}

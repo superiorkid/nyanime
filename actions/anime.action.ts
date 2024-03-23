@@ -1,6 +1,9 @@
 "use server";
 
-import { Anime } from "@/types/Anime";
+import { Anime, Data } from "@/types/Anime";
+import { Characters } from "@/types/Character";
+import { Reviews } from "@/types/Reviews";
+import { Staff } from "@/types/Staff";
 
 interface TopAnimeProps {
   type?:
@@ -56,7 +59,7 @@ export async function getTopAnime({
     return data as Anime;
   } catch (error) {
     console.error(error);
-    throw new Error("something went wrong. Failed to get anime recommendation");
+    throw new Error("something went wrong. Failed to get top anime");
   }
 }
 
@@ -91,4 +94,98 @@ export async function getSeasonNow({
   }
 }
 
-export async function getRecentAnimeRecommendation() {}
+export async function getAnimeFullById(malId: number) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL + `/anime/${malId}/full`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data.data as Data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get full anime by id");
+  }
+}
+
+export async function getAnimeCharacters(malId: number) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL + `/anime/${malId}/characters`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as Characters;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime characters");
+  }
+}
+
+export async function getAnimeStaff(malId: number) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL + `/anime/${malId}/staff`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as Staff;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime staff");
+  }
+}
+
+export async function getAnimeReview(malId: number) {
+  try {
+    const res = await fetch(
+      process.env.JIKAN_BASE_URL + `/anime/${malId}/reviews`,
+      {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        next: { revalidate: 43200 },
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as Reviews;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime reviews");
+  }
+}

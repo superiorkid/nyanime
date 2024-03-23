@@ -13,6 +13,7 @@ const AnimeCards = ({ collections }: AnimeCardsProps) => {
         {collections.map((anime, index) => (
           <AnimeCard
             key={index}
+            malId={anime.mal_id}
             title={anime.title}
             releasedYear={anime.year!}
             genre={anime.genres.at(0)?.name!}

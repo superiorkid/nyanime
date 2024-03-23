@@ -9,6 +9,7 @@ interface AnimeCardProps {
   releasedYear: number;
   genre: string;
   image_url: string;
+  malId: number;
 }
 
 const AnimeCard = ({
@@ -16,11 +17,12 @@ const AnimeCard = ({
   releasedYear,
   title,
   image_url,
+  malId,
 }: AnimeCardProps) => {
   return (
     <Card className="overflow-hidden border-0 group/card rounded-2xl">
       <CardContent className="p-0 m-0 rounded-2xl">
-        <Link href={`/anime/123123`}>
+        <Link href={`/anime/${malId}`}>
           <div className="relative h-[278px] w-full">
             <Image
               fill

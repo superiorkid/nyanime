@@ -53,6 +53,32 @@ export interface Data {
   explicit_genres: any[];
   themes: Theme[];
   demographics: Demographic[];
+  relations: Relation[];
+  theme: Theme2;
+  external: External[];
+  streaming: any[];
+}
+
+export interface External {
+  name: string;
+  url: string;
+}
+
+export interface Theme2 {
+  openings: any[];
+  endings: string[];
+}
+
+export interface Relation {
+  relation: string;
+  entry: Entry[];
+}
+
+export interface Entry {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
 }
 
 export interface Images {
