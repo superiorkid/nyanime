@@ -10,8 +10,8 @@ import TrendingNowSection from "@/components/trending-now-section";
 export default async function Home() {
   const [forYouSelection, trendingNow, mostPopular] = await Promise.all([
     getSeasonNow({ limit: 25 }),
-    getTopAnime({ limit: 25, rating: "pg13" }),
-    getTopAnime({ limit: 18, filter: "bypopularity" }),
+    getTopAnime({ limit: 25, filter: "airing", rating: "r17" }),
+    getTopAnime({ limit: 18, filter: "bypopularity", rating: "pg13" }),
   ]);
 
   return (

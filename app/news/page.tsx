@@ -7,7 +7,7 @@ const NewsPage = () => {
   return (
     <main className="min-h-screen">
       <Container>
-        <AnimeTopWallpaper />
+        <AnimeTopWallpaper imageUrl="https://cdn.myanimelist.net//images//anime//1525//139345l.webp" />
         <NewsHero />
         <News />
       </Container>

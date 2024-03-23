@@ -39,7 +39,7 @@ export async function getTopAnime({
   try {
     const res = await fetch(
       process.env.JIKAN_BASE_URL +
-        `/top/anime?filter=${filter}&limit=${limit}&page=${page}&rating=${rating}&sfw=${sfw}&type=${type}`,
+        `/top/anime?type=${type}&filter=${filter}&rating=${rating}&sfw=${sfw}&page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: { Accept: "application/json" },

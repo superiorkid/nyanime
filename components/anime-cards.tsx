@@ -1,12 +1,23 @@
 import AnimeCard from "@/components/anime-card";
 import { Button } from "@/components/ui/button";
+import { Data } from "@/types/Anime";
 
-const AnimeCards = () => {
+interface AnimeCardsProps {
+  collections: Data[];
+}
+
+const AnimeCards = ({ collections }: AnimeCardsProps) => {
   return (
     <div className="flex-1 space-y-5">
       <div className="grid grid-cols-5 gap-4">
-        {Array.from({ length: 15 }).map((_, index) => (
-          <AnimeCard key={index} />
+        {collections.map((anime, index) => (
+          <AnimeCard
+            key={index}
+            title={anime.title}
+            releasedYear={anime.year!}
+            genre={anime.genres.at(0)?.name!}
+            image_url={anime.images.webp.large_image_url}
+          />
         ))}
       </div>
       <Button

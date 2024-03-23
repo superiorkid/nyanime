@@ -1,15 +1,8 @@
-import AnimeCard from "@/components/anime-card";
+import { getTopAnime } from "@/actions/anime.action";
 import AnimeCards from "@/components/anime-cards";
 import Container from "@/components/container";
 import SidebarFilter from "@/components/sidebar-filter";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +11,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 
-const CatalogPage = () => {
+const CatalogPage = async () => {
+  const collections = await getTopAnime({
+    filter: "bypopularity",
+    rating: "pg13",
+  });
+
   return (
     <div className="min-h-screen mt-8 mb-16">
       <Container>
@@ -40,7 +38,7 @@ const CatalogPage = () => {
         </div>
         <div className="flex space-x-9">
           <SidebarFilter />
-          <AnimeCards />
+          <AnimeCards collections={collections.data} />
         </div>
       </Container>
     </div>
