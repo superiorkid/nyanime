@@ -1,5 +1,4 @@
-import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { ReadonlyURLSearchParams } from "next/navigation";
 

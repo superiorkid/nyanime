@@ -1,12 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Data as GenreData } from "@/types/Genre";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useReducer } from "react";
-import { Button } from "./ui/button";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { useReducer } from "react";
 
 interface FilterByGenresProps {
   pathname: string;

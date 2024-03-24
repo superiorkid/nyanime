@@ -1,8 +1,10 @@
 "use client";
 
+import FilterByAiringStatus from "@/components/filter-by-airing-status";
 import FilterByGenres from "@/components/filter-by-genres";
 import FilterBySeason from "@/components/filter-by-season";
 import FilterByStudio from "@/components/filter-by-studio";
+import FilterByType from "@/components/filter-by-type";
 import FilterByYear from "@/components/filter-by-year";
 import {
   Accordion,
@@ -39,7 +41,7 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
           }
           break;
         default:
-          if (!value) {
+          if (!value || params.has(name, value)) {
             params.delete(name);
           } else {
             params.set(name, value);
@@ -102,14 +104,24 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
         <AccordionItem value="format">
           <AccordionTrigger>Format</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <FilterByType
+              createQueryString={createQueryString}
+              pathname={pathname}
+              router={router}
+              searchParams={searchParams}
+            />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="airing-status">
           <AccordionTrigger>Airing Status</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <FilterByAiringStatus
+              createQueryString={createQueryString}
+              pathname={pathname}
+              router={router}
+              searchParams={searchParams}
+            />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

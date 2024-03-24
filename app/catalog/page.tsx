@@ -4,7 +4,7 @@ import AnimeSort from "@/components/anime-sort";
 import Container from "@/components/container";
 import SidebarFilter from "@/components/sidebar-filter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ORDER_BY, SORT_BY } from "@/types/enums";
+import { ORDER_BY, SORT_BY, STATUS, TYPE } from "@/types/enums";
 import { Terminal } from "lucide-react";
 
 interface CatalogPageProps {
@@ -13,11 +13,13 @@ interface CatalogPageProps {
     year?: string;
     genres?: string | string[];
     producers?: string | string[];
+    status?: string;
+    type?: string;
   };
 }
 
 const CatalogPage = async ({
-  searchParams: { sort, year, genres: genre, producers },
+  searchParams: { sort, year, genres: genre, producers, status, type },
 }: CatalogPageProps) => {
   const sortSplit = sort?.split("-");
 
@@ -45,6 +47,12 @@ const CatalogPage = async ({
           : undefined,
       genres: Array.isArray(genre) ? genre.join(",") : genre,
       producers: Array.isArray(producers) ? producers.join(",") : producers,
+      status: Object.values(STATUS).includes(status as STATUS)
+        ? (status as STATUS)
+        : undefined,
+      type: Object.values(TYPE).includes(type as TYPE)
+        ? (type as TYPE)
+        : undefined,
     }),
     getGenres(),
     getStudio(),
