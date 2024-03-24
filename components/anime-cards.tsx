@@ -1,6 +1,6 @@
 import AnimeCard from "@/components/anime-card";
 import { Button } from "@/components/ui/button";
-import { Data } from "@/types/Anime";
+import { Data } from "@/types/AnimeSearch";
 
 interface AnimeCardsProps {
   collections: Data[];

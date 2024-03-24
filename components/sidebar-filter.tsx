@@ -1,31 +1,55 @@
+"use client";
+
+import FilterByGenres from "@/components/filter-by-genres";
+import FilterBySeason from "@/components/filter-by-season";
+import FilterByStudio from "@/components/filter-by-studio";
+import FilterByYear from "@/components/filter-by-year";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Data as GenreData } from "@/types/Genre";
+import { Data as ProducerData } from "@/types/Producer";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
-const SidebarFilter = () => {
-  const seasons = [
-    {
-      id: "winter",
-      label: "Winter",
+interface SidebarFilterProps {
+  genres: GenreData[];
+  producers: ProducerData[];
+}
+
+const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      switch (name) {
+        case "genres":
+        case "producers":
+          if (params.has(name, value)) {
+            params.delete(name, value);
+          } else {
+            params.append(name, value);
+          }
+          break;
+        default:
+          if (!value) {
+            params.delete(name);
+          } else {
+            params.set(name, value);
+          }
+      }
+
+      return params.toString();
     },
-    {
-      id: "spring",
-      label: "Spring",
-    },
-    {
-      id: "summer",
-      label: "Summer",
-    },
-    {
-      id: "fall",
-      label: "Fall",
-    },
-  ];
+    [searchParams]
+  );
 
   return (
     <aside className="w-56">
@@ -33,50 +57,45 @@ const SidebarFilter = () => {
         <AccordionItem value="year">
           <AccordionTrigger>Year</AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-3 gap-2">
-              <Button variant="outline" className="bg-foreground">
-                2021
-              </Button>
-              <Button variant="outline" className="bg-foreground">
-                2022
-              </Button>
-              <Button variant="outline" className="bg-foreground">
-                2023
-              </Button>
-            </div>
+            <FilterByYear
+              createQueryString={createQueryString}
+              pathname={pathname}
+              router={router}
+              searchParams={searchParams}
+            />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="season">
           <AccordionTrigger>Season</AccordionTrigger>
           <AccordionContent>
-            <div className="flex flex-col space-y-2">
-              {seasons.map((season, index) => (
-                <div className="flex items-center space-x-2" key={index}>
-                  <Checkbox id={season.id} />
-                  <label
-                    htmlFor="terms2"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    {season.label}
-                  </label>
-                </div>
-              ))}
-            </div>
+            <FilterBySeason />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="genres">
           <AccordionTrigger>Genres</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <FilterByGenres
+              createQueryString={createQueryString}
+              genres={genres}
+              pathname={pathname}
+              router={router}
+              searchParams={searchParams}
+            />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="studio">
           <AccordionTrigger>Studio</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <FilterByStudio
+              producers={producers}
+              createQueryString={createQueryString}
+              pathname={pathname}
+              router={router}
+              searchParams={searchParams}
+            />
           </AccordionContent>
         </AccordionItem>
 
