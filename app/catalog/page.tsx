@@ -9,6 +9,7 @@ import { Terminal } from "lucide-react";
 
 interface CatalogPageProps {
   searchParams: {
+    page?: string;
     sort?: string;
     year?: string;
     genres?: string | string[];
@@ -19,9 +20,13 @@ interface CatalogPageProps {
 }
 
 const CatalogPage = async ({
-  searchParams: { sort, year, genres: genre, producers, status, type },
+  searchParams: { sort, year, genres: genre, producers, status, type, page },
 }: CatalogPageProps) => {
   const sortSplit = sort?.split("-");
+
+  // const memoizeDateRange = useMemo(() => {
+  //   return getDateRange({ season, year });
+  // }, [season, year]);
 
   const [collections, genres, studios] = await Promise.all([
     getAnimeSearch({
@@ -38,11 +43,11 @@ const CatalogPage = async ({
           ? (sortSplit.at(1) as SORT_BY)
           : undefined,
       start_date:
-        year?.match(/^-?\d+$/) && year?.length === 4
+        year && year.length === 4 && year.match(/^-?\d+$/)
           ? year + "-01-01"
           : undefined,
       end_date:
-        year?.match(/^-?\d+$/) && year?.length === 4
+        year && year.length === 4 && year.match(/^-?\d+$/)
           ? year + "-12-31"
           : undefined,
       genres: Array.isArray(genre) ? genre.join(",") : genre,
@@ -53,6 +58,7 @@ const CatalogPage = async ({
       type: Object.values(TYPE).includes(type as TYPE)
         ? (type as TYPE)
         : undefined,
+      page: Number(page) || undefined,
     }),
     getGenres(),
     getStudio(),
@@ -75,7 +81,7 @@ const CatalogPage = async ({
               </Alert>
             </div>
           ) : (
-            <AnimeCards collections={collections.data} />
+            <AnimeCards collections={collections} />
           )}
         </div>
       </Container>

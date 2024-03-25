@@ -1,21 +1,20 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { ReadonlyURLSearchParams } from "next/navigation";
 
 const AIRING_STATUS = ["airing", "complete", "upcoming"];
 
 interface FilterByAiringStatusProps {
-  searchParams: ReadonlyURLSearchParams;
   router: AppRouterInstance;
   pathname: string;
   createQueryString: (name: string, value: string) => string;
+  containQueryString: (name: string, value: string) => boolean;
 }
 
 const FilterByAiringStatus = ({
-  searchParams,
   router,
   pathname,
   createQueryString,
+  containQueryString,
 }: FilterByAiringStatusProps) => {
   return (
     <div className="flex flex-col space-y-3">
@@ -23,9 +22,12 @@ const FilterByAiringStatus = ({
         <div className="flex items-center space-x-2" key={index}>
           <Checkbox
             id={status}
-            checked={searchParams.has("status", status)}
+            checked={containQueryString("status", status)}
             onClick={() =>
-              router.push(pathname + "?" + createQueryString("status", status))
+              router.push(
+                pathname + "?" + createQueryString("status", status),
+                { scroll: false }
+              )
             }
           />
           <label

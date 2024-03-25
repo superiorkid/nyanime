@@ -17,15 +17,15 @@ const TYPES = [
 interface FilterByTypeProps {
   router: AppRouterInstance;
   pathname: string;
-  searchParams: ReadonlyURLSearchParams;
   createQueryString: (name: string, value: string) => string;
+  containQueryString: (name: string, value: string) => boolean;
 }
 
 const FilterByType = ({
   router,
   pathname,
-  searchParams,
   createQueryString,
+  containQueryString,
 }: FilterByTypeProps) => {
   return (
     <div className="flex flex-col space-y-3">
@@ -33,9 +33,11 @@ const FilterByType = ({
         <div className="flex items-center space-x-2" key={index}>
           <Checkbox
             id={type}
-            checked={searchParams.has("type", type)}
+            checked={containQueryString("type", type)}
             onClick={() =>
-              router.push(pathname + "?" + createQueryString("type", type))
+              router.push(pathname + "?" + createQueryString("type", type), {
+                scroll: false,
+              })
             }
           />
           <label

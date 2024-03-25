@@ -31,7 +31,7 @@ export default async function Home() {
             forYouSelection.data.length
           )}
         />
-        <FeaturedCollectionSection />
+        {/*<FeaturedCollectionSection />*/}
         <TrendingNowSection collections={trendingNow.data} />
         <MostPopularSection collections={mostPopular.data} />
       </Container>

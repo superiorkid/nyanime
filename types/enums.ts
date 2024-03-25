@@ -43,3 +43,10 @@ export enum SORT_BY {
   DESC = "desc",
   ASC = "asc",
 }
+
+export enum SEASON {
+  SPRING = "spring",
+  FALL = "fall",
+  SUMMER = "summer",
+  WINTER = "winter"
+}

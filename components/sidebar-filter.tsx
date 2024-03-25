@@ -2,7 +2,6 @@
 
 import FilterByAiringStatus from "@/components/filter-by-airing-status";
 import FilterByGenres from "@/components/filter-by-genres";
-import FilterBySeason from "@/components/filter-by-season";
 import FilterByStudio from "@/components/filter-by-studio";
 import FilterByType from "@/components/filter-by-type";
 import FilterByYear from "@/components/filter-by-year";
@@ -34,14 +33,18 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
       switch (name) {
         case "genres":
         case "producers":
-          if (params.has(name, value)) {
-            params.delete(name, value);
+          const getParams = params.getAll(name);
+
+          if (getParams.includes(value)) {
+            let values = getParams.filter((val) => val !== value);
+            params.delete(name);
+            values.forEach((value) => params.append(name, value));
           } else {
             params.append(name, value);
           }
           break;
         default:
-          if (!value || params.has(name, value)) {
+          if (!value || params.get(name) === value) {
             params.delete(name);
           } else {
             params.set(name, value);
@@ -49,6 +52,14 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
       }
 
       return params.toString();
+    },
+    [searchParams]
+  );
+
+  const containQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = searchParams.getAll(name);
+      return params.includes(value);
     },
     [searchParams]
   );
@@ -68,15 +79,27 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
           </AccordionContent>
         </AccordionItem>
 
-        <AccordionItem value="season">
+        {/* <AccordionItem value="season">
           <AccordionTrigger>Season</AccordionTrigger>
           <AccordionContent>
-            <FilterBySeason />
+            <FilterBySeason
+              createQueryString={createQueryString}
+              pathname={pathname}
+              router={router}
+              containQueryString={containQueryString}
+            />
           </AccordionContent>
-        </AccordionItem>
+        </AccordionItem> */}
 
         <AccordionItem value="genres">
-          <AccordionTrigger>Genres</AccordionTrigger>
+          <AccordionTrigger>
+            <p>
+              Genres{" "}
+              <span className="font-medium text-sm text-zinc-400">
+                (multiple)
+              </span>
+            </p>
+          </AccordionTrigger>
           <AccordionContent>
             <FilterByGenres
               createQueryString={createQueryString}
@@ -84,19 +107,28 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
               pathname={pathname}
               router={router}
               searchParams={searchParams}
+              containQueryString={containQueryString}
             />
           </AccordionContent>
         </AccordionItem>
 
         <AccordionItem value="studio">
-          <AccordionTrigger>Studio</AccordionTrigger>
+          <AccordionTrigger>
+            {" "}
+            <p>
+              Studio{" "}
+              <span className="font-medium text-sm text-zinc-400">
+                (multiple)
+              </span>
+            </p>
+          </AccordionTrigger>
           <AccordionContent>
             <FilterByStudio
               producers={producers}
               createQueryString={createQueryString}
               pathname={pathname}
               router={router}
-              searchParams={searchParams}
+              containQueryString={containQueryString}
             />
           </AccordionContent>
         </AccordionItem>
@@ -108,7 +140,7 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
               createQueryString={createQueryString}
               pathname={pathname}
               router={router}
-              searchParams={searchParams}
+              containQueryString={containQueryString}
             />
           </AccordionContent>
         </AccordionItem>
@@ -120,7 +152,7 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
               createQueryString={createQueryString}
               pathname={pathname}
               router={router}
-              searchParams={searchParams}
+              containQueryString={containQueryString}
             />
           </AccordionContent>
         </AccordionItem>

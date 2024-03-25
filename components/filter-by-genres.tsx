@@ -14,14 +14,15 @@ interface FilterByGenresProps {
   genres: GenreData[];
   searchParams: ReadonlyURLSearchParams;
   createQueryString: (name: string, value: string) => string;
+  containQueryString: (name: string, value: string) => boolean;
 }
 
 const FilterByGenres = ({
   pathname,
   router,
   genres,
-  searchParams,
   createQueryString,
+  containQueryString,
 }: FilterByGenresProps) => {
   const [collapse, collapseToggle] = useReducer((state) => !state, false);
 
@@ -32,12 +33,13 @@ const FilterByGenres = ({
           <div className="flex items-center space-x-2" key={index}>
             <Checkbox
               id={genre.mal_id.toString()}
-              checked={searchParams.has("genres", genre.mal_id.toString())}
+              checked={containQueryString("genres", genre.mal_id.toString())}
               onClick={() =>
                 router.push(
                   pathname +
                     "?" +
-                    createQueryString("genres", genre.mal_id.toString())
+                    createQueryString("genres", genre.mal_id.toString()),
+                  { scroll: false }
                 )
               }
             />

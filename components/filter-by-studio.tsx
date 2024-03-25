@@ -5,18 +5,18 @@ import { ReadonlyURLSearchParams } from "next/navigation";
 
 interface FilterByStudioProps {
   producers: Data[];
-  searchParams: ReadonlyURLSearchParams;
   router: AppRouterInstance;
   pathname: string;
   createQueryString: (name: string, value: string) => string;
+  containQueryString: (name: string, value: string) => boolean;
 }
 
 const FilterByStudio = ({
   producers,
   router,
-  searchParams,
   pathname,
   createQueryString,
+  containQueryString,
 }: FilterByStudioProps) => {
   return (
     <div className="flex flex-col space-y-3">
@@ -24,12 +24,16 @@ const FilterByStudio = ({
         <div className="flex items-center space-x-2" key={index}>
           <Checkbox
             id={producer.mal_id.toString()}
-            checked={searchParams.has("producers", producer.mal_id.toString())}
+            checked={containQueryString(
+              "producers",
+              producer.mal_id.toString()
+            )}
             onClick={() =>
               router.push(
                 pathname +
                   "?" +
-                  createQueryString("producers", producer.mal_id.toString())
+                  createQueryString("producers", producer.mal_id.toString()),
+                { scroll: false }
               )
             }
           />

@@ -23,6 +23,7 @@ const MostPopularSection = ({ collections }: MostPopularSectionProps) => {
               image_url={anime.images.webp.large_image_url}
               releasedYear={anime.year!}
               title={anime.title}
+              score={anime.score}
             />
           ))}
         </div>

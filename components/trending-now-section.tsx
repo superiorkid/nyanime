@@ -33,6 +33,7 @@ const TrendingNowSection = ({ collections }: TrendingNowSectionProps) => {
                   releasedYear={anime.year!}
                   genre={anime.genres.at(0)?.name!}
                   image_url={anime.images.webp.large_image_url}
+                  score={anime.score}
                 />
               </CarouselItem>
             ))}

@@ -33,6 +33,7 @@ const ForYouSection = ({ collections }: ForYouSectionProps) => {
                   genre={anime.genres.at(0)?.name!}
                   image_url={anime.images.webp.large_image_url}
                   malId={anime.mal_id}
+                  score={anime.score}
                 />
               </CarouselItem>
             ))}

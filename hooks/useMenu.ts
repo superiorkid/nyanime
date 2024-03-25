@@ -8,12 +8,12 @@ export default function useMenu() {
     () => [
       { label: "Home", href: "/", isActive: pathname === "/" },
       { label: "Catalog", href: "/catalog", isActive: pathname === "/catalog" },
-      { label: "News", href: "/news", isActive: pathname === "/news" },
-      {
-        label: "Collections",
-        href: "/collections",
-        isActive: pathname === "/collections",
-      },
+      // { label: "News", href: "/news", isActive: pathname === "/news" },
+      // {
+      //   label: "Collections",
+      //   href: "/collections",
+      //   isActive: pathname === "/collections",
+      // },
     ],
     [pathname]
   );

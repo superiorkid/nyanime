@@ -31,7 +31,8 @@ const FilterByYear = ({
               router.push(
                 pathname +
                   "?" +
-                  createQueryString("year", (currentYear - index).toString())
+                  createQueryString("year", (currentYear - index).toString()),
+                { scroll: false }
               )
             }
           >
@@ -43,7 +44,9 @@ const FilterByYear = ({
         variant={!searchParams.get("year") ? "secondary" : "default"}
         className="last:-order-1 first:order-1"
         onClick={() =>
-          router.push(pathname + "?" + createQueryString("year", ""))
+          router.push(pathname + "?" + createQueryString("year", ""), {
+            scroll: false,
+          })
         }
       >
         All

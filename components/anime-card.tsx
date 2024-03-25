@@ -1,8 +1,9 @@
-import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 interface AnimeCardProps {
   title: string;
@@ -10,6 +11,7 @@ interface AnimeCardProps {
   genre: string;
   image_url: string;
   malId: number;
+  score: number;
 }
 
 const AnimeCard = ({
@@ -18,6 +20,7 @@ const AnimeCard = ({
   title,
   image_url,
   malId,
+  score,
 }: AnimeCardProps) => {
   return (
     <Card className="overflow-hidden border-0 group/card rounded-2xl">
@@ -34,7 +37,12 @@ const AnimeCard = ({
               decoding="async"
             />
 
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm hidden group-hover/card:flex group-hover/card:space-x-3">
+            <Badge className="absolute h-9 top-0 left-1/2 -translate-x-1/2 rounded-x-none rounded-t-none rounded-b-md -mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+              <Star className="w-4 h-5 mr-2" />
+              {score}
+            </Badge>
+
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-3">
               <Button
                 size="icon"
                 className="rounded-full h-12 w-12 group/like-btn"

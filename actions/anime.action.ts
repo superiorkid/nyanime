@@ -12,15 +12,15 @@ import { ORDER_BY, RATING, SORT_BY, STATUS, TYPE } from "@/types/enums";
 
 interface TopAnimeProps {
   type?:
-  | "tv"
-  | "movie"
-  | "ova"
-  | "special"
-  | "ona"
-  | "music"
-  | "cm"
-  | "pv"
-  | "tv_special";
+    | "tv"
+    | "movie"
+    | "ova"
+    | "special"
+    | "ona"
+    | "music"
+    | "cm"
+    | "pv"
+    | "tv_special";
   filter?: "airing" | "upcoming" | "bypopularity" | "favorite";
   rating?: "g" | "pg" | "pg13" | "r17" | "r" | "rx";
   sfw?: boolean;
@@ -47,7 +47,7 @@ export async function getTopAnime({
   try {
     const res = await fetch(
       process.env.JIKAN_BASE_URL +
-      `/top/anime?type=${type}&filter=${filter}&rating=${rating}&sfw=${sfw}&page=${page}&limit=${limit}`,
+        `/top/anime?type=${type}&filter=${filter}&rating=${rating}&sfw=${sfw}&page=${page}&limit=${limit}`,
       {
         method: "GET",
         headers: { Accept: "application/json" },
@@ -78,7 +78,7 @@ export async function getSeasonNow({
   try {
     const res = await fetch(
       process.env.JIKAN_BASE_URL +
-      `/seasons/now?filter=${filter}&limit=${limit}&page=${page}&sfw=${sfw}&unapproved=${unapproved}`,
+        `/seasons/now?filter=${filter}&limit=${limit}&page=${page}&sfw=${sfw}&unapproved=${unapproved}`,
       {
         method: "GET",
         headers: { Accept: "application/json" },
@@ -290,13 +290,11 @@ export async function getAnimeSearch({
       }
     });
 
-    console.log(searchParams.toString());
-
     const res = await fetch(
       process.env.JIKAN_BASE_URL +
-      `/anime?` +
-      searchParams.toString() +
-      `&unapproved=${unapproved}&sfw=${sfw}`,
+        `/anime?` +
+        searchParams.toString() +
+        `&unapproved=${unapproved}&sfw=${sfw}`,
       {
         method: "GET",
         headers: { Accept: "application/json" },
