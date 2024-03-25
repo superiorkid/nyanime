@@ -29,7 +29,7 @@ const MostPopularSection = ({ collections }: MostPopularSectionProps) => {
         </div>
 
         <Link
-          href="#show-more-page"
+          href="/catalog"
           className={cn(
             buttonVariants({
               size: "lg",

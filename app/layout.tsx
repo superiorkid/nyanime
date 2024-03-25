@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
+import TanstackQueryProvider from "@/providers/tanstack-query-provider";
 
 export const metadata: Metadata = {
   title: "Next Anime | Your anime website preference",
@@ -23,9 +24,11 @@ export default function RootLayout({
           GeistSans.className
         )}
       >
-        <Navigation />
-        {children}
-        <Footer />
+        <TanstackQueryProvider>
+          <Navigation />
+          {children}
+          <Footer />
+        </TanstackQueryProvider>
       </body>
     </html>
   );
