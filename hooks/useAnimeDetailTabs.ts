@@ -13,6 +13,11 @@ export function useAnimeDetailTabs() {
         isActive: pathname === `/anime/${id}`,
       },
       {
+        label: "relations",
+        href: `/anime/${id}/relations`,
+        isActive: pathname === `/anime/${id}/relations`,
+      },
+      {
         label: "characters",
         href: `/anime/${id}/characters`,
         isActive: pathname === `/anime/${id}/characters`,
@@ -26,6 +31,11 @@ export function useAnimeDetailTabs() {
         label: "reviews",
         href: `/anime/${id}/reviews`,
         isActive: pathname === `/anime/${id}/reviews`,
+      },
+      {
+        label: "news",
+        href: `/anime/${id}/news`,
+        isActive: pathname === `/anime/${id}/news`,
       },
     ],
     [pathname, id]

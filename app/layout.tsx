@@ -1,10 +1,10 @@
-import Footer from "@/components/footer";
-import Navigation from "@/components/navigation";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
 import TanstackQueryProvider from "@/providers/tanstack-query-provider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { neobrutalism } from "@clerk/themes";
 
 export const metadata: Metadata = {
   title: "Next Anime | Your anime website preference",
@@ -17,19 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          "text-background bg-foreground relative",
-          GeistSans.className
-        )}
-      >
-        <TanstackQueryProvider>
-          <Navigation />
-          {children}
-          <Footer />
-        </TanstackQueryProvider>
-      </body>
-    </html>
+    <ClerkProvider appearance={{ baseTheme: neobrutalism }}>
+      <html lang="en">
+        <body
+          className={cn(
+            "text-background bg-foreground relative",
+            GeistSans.className
+          )}
+        >
+          <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

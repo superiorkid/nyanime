@@ -9,6 +9,7 @@ import { Producer } from "@/types/Producer";
 import { Reviews } from "@/types/Reviews";
 import { Staff } from "@/types/Staff";
 import { ORDER_BY, RATING, SORT_BY, STATUS, TYPE } from "@/types/enums";
+import { News } from "@/types/News";
 
 interface TopAnimeProps {
   type?:
@@ -356,5 +357,26 @@ export async function getStudio() {
   } catch (error) {
     console.error(error);
     throw new Error("something went wrong. Failed to get studio");
+  }
+}
+
+export async function getNews(id: string) {
+  try {
+    const res = await fetch(process.env.JIKAN_BASE_URL + `/anime/${id}/news`, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      next: { revalidate: 43200 },
+    });
+
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw new Error(data);
+    }
+
+    return data as News;
+  } catch (error) {
+    console.error(error);
+    throw new Error("something went wrong. Failed to get anime news");
   }
 }

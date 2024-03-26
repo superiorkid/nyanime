@@ -1,15 +1,21 @@
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-const NewsHero = () => {
+dayjs.extend(relativeTime);
+
+interface NewsHeroProps {
+  title: string;
+  date: string;
+}
+
+const NewsHero = ({ title, date }: NewsHeroProps) => {
   return (
     <section className="min-h-[64dvh] pt-16 grid grid-cols-2 items-center">
       <div>
         <div className="space-y-4">
-          <p className="font-medium text-zinc-400">15 minute ago</p>
-          <h1 className="text-5xl font-bold">
-            A New Season Of &quot;Bleach: Sennen Kessen-Hen&quot; Has Been
-            Announced
-          </h1>
+          <p className="font-medium text-zinc-400">{dayjs(date).fromNow()}</p>
+          <h1 className="text-5xl font-bold">{title}</h1>
           <Button variant="secondary" size="lg" className="font-semibold">
             Read More
           </Button>
