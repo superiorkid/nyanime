@@ -1,18 +1,19 @@
-import React from "react";
 import Container from "@/components/container";
 import Menu from "@/components/menu";
-import { buttonVariants } from "./ui/button";
-import SearchBar from "./search-bar";
-import { User } from "@clerk/nextjs/server";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { neobrutalism } from "@clerk/themes";
 import UserMenuDropdown from "@/components/user-menu-dropdown";
-import { UserButton } from "@clerk/nextjs";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import SearchBar from "./search-bar";
+import { buttonVariants } from "./ui/button";
+import { User } from "@prisma/client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import UserButton from "./user-button";
 
-const Navigation = () => {
-  const user = false;
+interface NavigationProps {
+  user: User | null;
+}
 
+const Navigation = ({ user }: NavigationProps) => {
   return (
     <header className="border-b border-zinc-500 py-3 bg-transparent">
       <Container className="flex justify-between items-center">
@@ -22,16 +23,13 @@ const Navigation = () => {
           </div>
           <Menu />
         </div>
-        <div className="flex space-x-2 items-center">
+        <div className="flex space-x-1 items-center">
           <SearchBar />
 
-          {user ? (
+          {!!user ? (
             <>
               <UserMenuDropdown />
-              <UserButton
-                afterSignOutUrl="/"
-                appearance={{ baseTheme: neobrutalism }}
-              />
+              <UserButton />
             </>
           ) : (
             <>
@@ -40,7 +38,7 @@ const Navigation = () => {
                 className={cn(
                   buttonVariants({
                     className: cn(
-                      "font-semibold bg-foreground text-background hover:bg-muted-foreground"
+                      "font-semibold bg-foreground text-background hover:bg-muted-foreground z-10"
                     ),
                     variant: "secondary",
                     size: "lg",
@@ -53,7 +51,7 @@ const Navigation = () => {
                 href="/sign-up"
                 className={cn(
                   buttonVariants({
-                    className: cn("font-semibold"),
+                    className: cn("font-semibold z-10"),
                     variant: "secondary",
                     size: "lg",
                   })

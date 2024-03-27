@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
 import { Button, buttonVariants } from "@/components/ui/button";
-import dayjs from "dayjs";
 import { Data } from "@/types/News";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 
@@ -32,8 +31,8 @@ function NewsTabsContent({ news, animeId }: NewsTabsContentProps) {
       </div>
 
       <div className="flex flex-col divide-y mt-3">
-        {news.slice(0, 5).map((news) => (
-          <div className="flex space-x-5 py-3 items-center">
+        {news.slice(0, 5).map((news, index) => (
+          <div className="flex space-x-5 py-3 items-center" key={index}>
             <div className="relative w-[150px] h-[190px]">
               <Image
                 fill

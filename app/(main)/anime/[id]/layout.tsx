@@ -28,9 +28,12 @@ const AnimeDetailLayout = async ({
   ]);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen -z-40">
       <Container>
-        <HeaderImage src={pictures.data.at(0)?.webp.large_image_url!} />
+        <HeaderImage
+          src={pictures.data.at(0)?.webp.large_image_url!}
+          trailerUrl={animeDetails.trailer.url!}
+        />
         <AnimeDetailHeader
           imageSrc={animeDetails.images.webp.large_image_url}
           score={animeDetails.score}

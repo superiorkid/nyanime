@@ -12,11 +12,11 @@ export function useAnimeDetailTabs() {
         href: `/anime/${id}`,
         isActive: pathname === `/anime/${id}`,
       },
-      {
-        label: "relations",
-        href: `/anime/${id}/relations`,
-        isActive: pathname === `/anime/${id}/relations`,
-      },
+      // {
+      //   label: "relations",
+      //   href: `/anime/${id}/relations`,
+      //   isActive: pathname === `/anime/${id}/relations`,
+      // },
       {
         label: "characters",
         href: `/anime/${id}/characters`,

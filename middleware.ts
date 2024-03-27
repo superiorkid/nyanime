@@ -1,18 +1,21 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { cookies } from "next/headers"
+import { NextRequest, NextResponse } from "next/server"
 
-// See https://clerk.com/docs/references/nextjs/auth-middleware
-// for more information about configuring your Middleware
-export default authMiddleware({
-  // Allow signed out users to access the specified routes:
-  publicRoutes: ["/", "/catalog", "/anime/:id", "/sign-in", "/sign-up"],
-});
+const authRoute = ["/sign-in", "sign-up"]
+
+export function middleware(request: NextRequest) {
+    const token = cookies().has("token")
+
+    if (token && authRoute.includes(request.nextUrl.pathname)) {
+        return NextResponse.redirect(new URL("/", request.url))
+    }
+
+    return NextResponse.next()
+}
+
 
 export const config = {
-  matcher: [
-    // Exclude files with a "." followed by an extension, which are typically static files.
-    // Exclude files in the _next directory, which are Next.js internals.
-    "/((?!.+\\.[\\w]+$|_next).*)",
-    // Re-include any files in the api or trpc folders that might have an extension
-    "/(api|trpc)(.*)",
-  ],
-};
+    matcher: [
+        '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    ],
+}

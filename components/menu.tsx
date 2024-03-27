@@ -10,7 +10,7 @@ const Menu = () => {
   const menus = useMenu();
 
   return (
-    <nav className="flex space-x-2">
+    <nav className="flex space-x-2 z-50">
       {menus.map(({ href, isActive, label }, index) => (
         <Link
           key={index}

@@ -19,7 +19,7 @@ const ReviewTabsContent = ({ reviews }: ReviewTabsContentProps) => {
   return (
     <div className="flex flex-col space-y-8 max-w-3xl">
       <div className="space-y-3 w-full">
-        <h1 className="text-xl font-semibold">Anime Characters</h1>
+        <h1 className="text-xl font-semibold">Reviews</h1>
 
         <Button variant="secondary" className="w-full" size="lg">
           <Plus className="w-5 h-5 mr-2" />

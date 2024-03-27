@@ -1,10 +1,9 @@
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import TanstackQueryProvider from "@/providers/tanstack-query-provider";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
-import TanstackQueryProvider from "@/providers/tanstack-query-provider";
-import { ClerkProvider } from "@clerk/nextjs";
-import { neobrutalism } from "@clerk/themes";
 
 export const metadata: Metadata = {
   title: "Next Anime | Your anime website preference",
@@ -17,17 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: neobrutalism }}>
-      <html lang="en">
-        <body
-          className={cn(
-            "text-background bg-foreground relative",
-            GeistSans.className
-          )}
-        >
-          <TanstackQueryProvider>{children}</TanstackQueryProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body
+        className={cn(
+          "text-background bg-foreground relative",
+          GeistSans.className
+        )}
+      >
+        <TanstackQueryProvider>
+          {children}
+          <Toaster richColors expand />
+        </TanstackQueryProvider>
+      </body>
+    </html>
   );
 }

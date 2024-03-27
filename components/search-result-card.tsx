@@ -28,7 +28,7 @@ const SearchResultCard = ({
         setSearchTerm((_) => "");
         router.push(`/anime/${malId}`);
       }}
-      className="justify-start space-x-2 p-0 w-full hover:cursor-pointer"
+      className="justify-start space-x-2 p-0 w-full hover:cursor-pointer z-50"
     >
       <div className="flex space-x-2 items-center p-1.5 hover:bg-zinc-200/50 rounded-md w-full">
         <div className="relative h-8 w-8">
