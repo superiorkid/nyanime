@@ -28,7 +28,7 @@ const Navigation = ({ user }: NavigationProps) => {
 
           {!!user ? (
             <>
-              <UserMenuDropdown />
+              <UserMenuDropdown user={user} />
               <UserButton user={user} />
             </>
           ) : (

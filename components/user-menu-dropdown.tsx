@@ -7,10 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { User } from "@prisma/client";
 import { Bookmark, Check, ChevronDown, Eye, Folder } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-function UserMenuDropdown() {
+interface UserMenuDropdownProps {
+  user: User | null;
+}
+
+function UserMenuDropdown({ user }: UserMenuDropdownProps) {
   const router = useRouter();
 
   return (
@@ -28,28 +33,30 @@ function UserMenuDropdown() {
       <DropdownMenuContent className="p-2 w-[201px]" align="end">
         <DropdownMenuItem
           className="py-2.5 hover:cursor-pointer text-zinc-600"
-          onClick={() => router.push("/superiorkid/library/watching")}
+          onClick={(event) => {
+            router.push(`/${user?.username}/library/watching`);
+          }}
         >
           <Eye className="w-5 h-5 mr-2" />
           Watching
         </DropdownMenuItem>
         <DropdownMenuItem
           className="py-2.5 hover:cursor-pointer text-zinc-600"
-          onClick={() => router.push("/superiorkid/library/to-watch")}
+          onClick={() => router.push(`/${user?.username}/library/to-watch`)}
         >
           <Bookmark className="w-5 h-5 mr-2" />
           To Watch
         </DropdownMenuItem>
         <DropdownMenuItem
           className="py-2.5 hover:cursor-pointer text-zinc-600"
-          onClick={() => router.push("/superiorkid/library/watched")}
+          onClick={() => router.push(`/${user?.username}/library/watched`)}
         >
           <Check className="w-5 h-5 mr-2" />
           Watched
         </DropdownMenuItem>
         <DropdownMenuItem
           className="py-2.5 hover:cursor-pointer text-zinc-600"
-          onClick={() => router.push("/superiorkid/library/collections")}
+          onClick={() => router.push(`/${user?.username}/library/collections`)}
         >
           <Folder className="w-5 h-5 mr-2" />
           Collections

@@ -1,3 +1,4 @@
+import { getCurrentUser } from "@/actions/user.action";
 import Container from "@/components/container";
 import LibraryTabs from "@/components/library-tabs";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,9 @@ interface LibraryLayoutProps {
   children: Readonly<React.ReactNode>;
 }
 
-const LibraryLayout = ({ children }: LibraryLayoutProps) => {
+const LibraryLayout = async ({ children }: LibraryLayoutProps) => {
+  const user = await getCurrentUser();
+
   return (
     <div className="min-h-screen">
       <section className="h-[20dvh] relative">
@@ -44,7 +47,7 @@ const LibraryLayout = ({ children }: LibraryLayoutProps) => {
         </Container>
       </section>
 
-      <LibraryTabs />
+      <LibraryTabs user={user} />
 
       {children}
     </div>
