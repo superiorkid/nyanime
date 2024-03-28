@@ -9,12 +9,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { User } from "@prisma/client";
 import { LogOut, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
 
-const UserButton = () => {
+interface UserButtonProps {
+  user: User | null;
+}
+
+const UserButton = ({ user }: UserButtonProps) => {
   const [isPending, startTrantision] = useTransition();
   const router = useRouter();
 
@@ -50,7 +55,10 @@ const UserButton = () => {
           </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-zinc-600 py-2.5">
+        <DropdownMenuItem
+          className="text-zinc-600 py-2.5 hover:cursor-pointer"
+          onClick={() => router.push(`/${user?.username}/settings/account`)}
+        >
           <Settings className="w-6 h-6 mr-2" />
           Settings
         </DropdownMenuItem>

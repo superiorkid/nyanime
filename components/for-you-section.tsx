@@ -7,12 +7,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Data } from "@/types/Anime";
+import { User } from "@prisma/client";
 
 interface ForYouSectionProps {
   collections: Data[];
+  user: User | null;
 }
 
-const ForYouSection = ({ collections }: ForYouSectionProps) => {
+const ForYouSection = ({ collections, user }: ForYouSectionProps) => {
   return (
     <section className="min-h-[38dvh] grid grid-cols-1 items-center mb-16">
       <div className="space-y-3.5">
@@ -28,6 +30,7 @@ const ForYouSection = ({ collections }: ForYouSectionProps) => {
             {collections.map((anime, index) => (
               <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/6">
                 <AnimeCard
+                  isAuth={!!user}
                   title={anime.title}
                   releasedYear={anime.year!}
                   genre={anime.genres.at(0)?.name!}

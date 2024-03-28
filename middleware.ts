@@ -10,6 +10,12 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/", request.url))
     }
 
+    const splitRoute = request.nextUrl.pathname.split("/")
+
+    if (!token && splitRoute.includes("settings") || splitRoute.includes("library")) {
+        return NextResponse.redirect(new URL("/sign-in", request.url))
+    }
+
     return NextResponse.next()
 }
 

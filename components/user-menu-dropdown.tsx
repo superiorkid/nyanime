@@ -1,40 +1,58 @@
-import React from "react";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Bookmark, Check, ChevronDown, Eye } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Bookmark, Check, ChevronDown, Eye, Folder } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function UserMenuDropdown() {
+  const router = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="link"
           size="lg"
-          className="font-semibold text-background"
+          className="font-semibold text-background z-10"
         >
           My Library
           <ChevronDown className="w-5 h-5 ml-2" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-2 w-[201px]" align="end">
-        <DropdownMenuItem className="py-2.5 hover:cursor-pointer text-zinc-600">
+        <DropdownMenuItem
+          className="py-2.5 hover:cursor-pointer text-zinc-600"
+          onClick={() => router.push("/superiorkid/library/watching")}
+        >
           <Eye className="w-5 h-5 mr-2" />
           Watching
         </DropdownMenuItem>
-        <DropdownMenuItem className="py-2.5 hover:cursor-pointer text-zinc-600">
+        <DropdownMenuItem
+          className="py-2.5 hover:cursor-pointer text-zinc-600"
+          onClick={() => router.push("/superiorkid/library/to-watch")}
+        >
           <Bookmark className="w-5 h-5 mr-2" />
           To Watch
         </DropdownMenuItem>
-        <DropdownMenuItem className="py-2.5 hover:cursor-pointer text-zinc-600">
+        <DropdownMenuItem
+          className="py-2.5 hover:cursor-pointer text-zinc-600"
+          onClick={() => router.push("/superiorkid/library/watched")}
+        >
           <Check className="w-5 h-5 mr-2" />
           Watched
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="py-2.5 hover:cursor-pointer text-zinc-600"
+          onClick={() => router.push("/superiorkid/library/collections")}
+        >
+          <Folder className="w-5 h-5 mr-2" />
+          Collections
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

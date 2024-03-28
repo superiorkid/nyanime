@@ -3,6 +3,7 @@ import {
   getAnimePictures,
   getSeasonNow,
 } from "@/actions/anime.action";
+import { getCurrentUser } from "@/actions/user.action";
 import AnimeDetailHeader from "@/components/anime-detail-header";
 import Container from "@/components/container";
 import ForYouSection from "@/components/for-you-section";
@@ -21,10 +22,11 @@ const AnimeDetailLayout = async ({
   children,
   params: { id },
 }: AnimeDetailLayoutProps) => {
-  const [specialForYou, animeDetails, pictures] = await Promise.all([
+  const [specialForYou, animeDetails, pictures, user] = await Promise.all([
     getSeasonNow({ limit: 25 }),
     getAnimeFullById(+id),
     getAnimePictures(+id),
+    getCurrentUser(),
   ]);
 
   return (
@@ -46,7 +48,7 @@ const AnimeDetailLayout = async ({
           {children}
         </div>
 
-        <ForYouSection collections={specialForYou.data} />
+        <ForYouSection collections={specialForYou.data} user={user} />
       </Container>
     </main>
   );

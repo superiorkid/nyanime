@@ -1,4 +1,5 @@
 import { getAnimeSearch, getGenres, getStudio } from "@/actions/anime.action";
+import { getCurrentUser } from "@/actions/user.action";
 import AnimeCards from "@/components/anime-cards";
 import AnimeSort from "@/components/anime-sort";
 import Container from "@/components/container";
@@ -28,7 +29,7 @@ const CatalogPage = async ({
   //   return getDateRange({ season, year });
   // }, [season, year]);
 
-  const [collections, genres, studios] = await Promise.all([
+  const [collections, genres, studios, user] = await Promise.all([
     getAnimeSearch({
       order_by:
         Array.isArray(sortSplit) &&
@@ -62,6 +63,7 @@ const CatalogPage = async ({
     }),
     getGenres(),
     getStudio(),
+    getCurrentUser(),
   ]);
 
   return (
@@ -81,7 +83,7 @@ const CatalogPage = async ({
               </Alert>
             </div>
           ) : (
-            <AnimeCards collections={collections} />
+            <AnimeCards collections={collections} user={user} />
           )}
         </div>
       </Container>

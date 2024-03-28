@@ -29,7 +29,7 @@ const Navigation = ({ user }: NavigationProps) => {
           {!!user ? (
             <>
               <UserMenuDropdown />
-              <UserButton />
+              <UserButton user={user} />
             </>
           ) : (
             <>
