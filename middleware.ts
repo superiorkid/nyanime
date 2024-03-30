@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 
     const splitRoute = request.nextUrl.pathname.split("/")
 
-    if (!token && splitRoute.includes("settings") || splitRoute.includes("library")) {
+    if ((!token && splitRoute.includes("settings")) || (!token && splitRoute.includes("library"))) {
         return NextResponse.redirect(new URL("/sign-in", request.url))
     }
 
