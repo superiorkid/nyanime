@@ -16,7 +16,10 @@ import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface LibraryTabsProps {
   user: Prisma.UserGetPayload<{
-    include: { watchings: { include: { anime: true } } };
+    include: {
+      watchings: { include: { anime: true } };
+      toWatch: { include: { anime: true } };
+    };
   }> | null;
 }
 
@@ -56,7 +59,7 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
             )}
           >
             <Bookmark className="w-5 h-5 mr-2" />
-            To Watch<span className="ml-2">34</span>
+            To Watch<span className="ml-2">{user?.toWatch.length}</span>
           </TabsTrigger>
           <TabsTrigger
             value="watched"

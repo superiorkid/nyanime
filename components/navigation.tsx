@@ -2,15 +2,19 @@ import Container from "@/components/container";
 import Menu from "@/components/menu";
 import UserMenuDropdown from "@/components/user-menu-dropdown";
 import { cn } from "@/lib/utils";
+import { Prisma, User } from "@prisma/client";
 import Link from "next/link";
 import SearchBar from "./search-bar";
 import { buttonVariants } from "./ui/button";
-import { User } from "@prisma/client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import UserButton from "./user-button";
 
 interface NavigationProps {
-  user: User | null;
+  user: Prisma.UserGetPayload<{
+    include: {
+      toWatch: { include: { anime: true } };
+      watchings: { include: { anime: true } };
+    };
+  }> | null;
 }
 
 const Navigation = ({ user }: NavigationProps) => {

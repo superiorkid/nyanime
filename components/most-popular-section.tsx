@@ -8,7 +8,10 @@ import Link from "next/link";
 interface MostPopularSectionProps {
   collections: Data[];
   user: Prisma.UserGetPayload<{
-    include: { watchings: { include: { anime: true } } };
+    include: {
+      watchings: { include: { anime: true } };
+      toWatch: { include: { anime: true } };
+    };
   }> | null;
 }
 

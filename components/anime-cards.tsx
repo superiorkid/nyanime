@@ -1,12 +1,15 @@
 import AnimeCard from "@/components/anime-card";
-import { AnimeSearch } from "@/types/AnimeSearch";
 import PaginationButton from "@/components/pagination-button";
-import { Prisma, User } from "@prisma/client";
+import { AnimeSearch } from "@/types/AnimeSearch";
+import { Prisma } from "@prisma/client";
 
 interface AnimeCardsProps {
   collections: AnimeSearch;
   user: Prisma.UserGetPayload<{
-    include: { watchings: { include: { anime: true } } };
+    include: {
+      watchings: { include: { anime: true } };
+      toWatch: { include: { anime: true } };
+    };
   }> | null;
 }
 

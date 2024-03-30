@@ -12,7 +12,10 @@ import { Prisma } from "@prisma/client";
 interface ForYouSectionProps {
   collections: Data[];
   user: Prisma.UserGetPayload<{
-    include: { watchings: { include: { anime: true } } };
+    include: {
+      watchings: { include: { anime: true } };
+      toWatch: { include: { anime: true } };
+    };
   }> | null;
 }
 

@@ -22,6 +22,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   watchings Watching[]
+  toWatch   ToWatch[]
 }
 
 model Anime {
@@ -34,15 +35,28 @@ model Anime {
   rating      String
 
   watchings Watching[]
+  toWatch   ToWatch[]
 
   @@index([title, rating])
 }
 
 model Watching {
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String
   anime      Anime    @relation(fields: [animeId], references: [id])
   animeId    String
+  assignedAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([userId, animeId])
+}
+
+model ToWatch {
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+  anime   Anime  @relation(fields: [animeId], references: [id])
+  animeId String
+
   assignedAt DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
