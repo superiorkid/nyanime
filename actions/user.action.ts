@@ -25,7 +25,8 @@ export async function getCurrentUser() {
           include: {
             anime: true
           }
-        }
+        },
+        watched: { include: { anime: true } }
       }
     });
 
@@ -217,4 +218,74 @@ export async function addToWatchList({
     throw new Error((error as Error).message);
   }
 
+}
+
+
+export async function addToWatchedList({
+  genre,
+  imageUrl,
+  malId,
+  releasedYear,
+  score,
+  title,
+}: {
+  genre: string;
+  imageUrl: string;
+  malId: number;
+  releasedYear: number;
+  score: number;
+  title: string;
+}) {
+  try {
+    const currentUser = await getCurrentUser()
+
+    let anime = await prisma.anime.findFirst({
+      where: {
+        malId: String(malId)
+      }
+    })
+
+    if (!anime) {
+      anime = await prisma.anime.create({
+        data: {
+          malId: String(malId),
+          title,
+          images: imageUrl,
+          releaseYear: String(releasedYear),
+          genre,
+          rating: String(score)
+        }
+      })
+    }
+
+    const isInToWatchedlist = await prisma.watched.findFirst({
+      where: {
+        userId: currentUser?.id,
+        animeId: anime.id
+      }
+    })
+
+    if (!isInToWatchedlist) {
+      // If the anime is not in the watchlist, add it
+      await prisma.watched.create({
+        data: {
+          userId: currentUser!.id,
+          animeId: anime.id
+        }
+      })
+    } else {
+      await prisma.watched.delete({
+        where: {
+          userId_animeId: { animeId: anime.id, userId: currentUser!.id }
+        }
+      })
+    }
+
+    return {
+      message: "Remove anime from watched list successfully"
+    }
+  } catch (error) {
+    console.error((error as Error).message);
+    throw new Error((error as Error).message);
+  }
 }

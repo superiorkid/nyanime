@@ -1,10 +1,11 @@
 import AddToWatchButton from "@/components/add-to-watch-button";
 import AddToWatchingButton from "@/components/add-to-watching-button";
+import AddWatchedButton from "@/components/add-watched-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
-import { Check, Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,6 +20,7 @@ interface AnimeCardProps {
     include: {
       watchings: { include: { anime: true } };
       toWatch: { include: { anime: true } };
+      watched: { include: { anime: true } };
     };
   }> | null;
 }
@@ -72,12 +74,15 @@ const AnimeCard = ({
                   score={score}
                   currentUserWatchings={user.watchings}
                 />
-                <Button
-                  size="icon"
-                  className="rounded-full h-12 w-12 group/dislike-btn"
-                >
-                  <Check className="w-5 h-5 stroke-zinc-400 group-hover/dislike-btn:stroke-background" />
-                </Button>
+                <AddWatchedButton
+                  title={title}
+                  releasedYear={releasedYear}
+                  genre={genre}
+                  image_url={image_url}
+                  malId={malId}
+                  score={score}
+                  currentUserWatced={user.watched}
+                />
               </div>
             ) : (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-3">

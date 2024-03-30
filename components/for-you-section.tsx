@@ -15,6 +15,7 @@ interface ForYouSectionProps {
     include: {
       watchings: { include: { anime: true } };
       toWatch: { include: { anime: true } };
+      watched: { include: { anime: true } };
     };
   }> | null;
 }

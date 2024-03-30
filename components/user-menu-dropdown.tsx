@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "@prisma/client";
-import { Bookmark, Check, ChevronDown, Eye, Folder } from "lucide-react";
+import { Bookmark, Check, ChevronDown, Eye } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface UserMenuDropdownProps {
@@ -54,13 +54,13 @@ function UserMenuDropdown({ user }: UserMenuDropdownProps) {
           <Check className="w-5 h-5 mr-2" />
           Watched
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           className="py-2.5 hover:cursor-pointer text-zinc-600"
           onClick={() => router.push(`/${user?.username}/library/collections`)}
         >
           <Folder className="w-5 h-5 mr-2" />
           Collections
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
