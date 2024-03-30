@@ -55,7 +55,7 @@ const SignInForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="john@example.com" {...field} />
+                <Input placeholder="john@example.com" autoFocus {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
