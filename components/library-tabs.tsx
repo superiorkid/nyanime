@@ -7,15 +7,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { Prisma } from "@prisma/client";
 import { Bookmark, Check, Eye, Folder } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import Container from "./container";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
-import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { User } from "@prisma/client";
 
 interface LibraryTabsProps {
-  user: User | null;
+  user: Prisma.UserGetPayload<{
+    include: { watchings: { include: { anime: true } } };
+  }> | null;
 }
 
 const LibraryTabs = ({ user }: LibraryTabsProps) => {
@@ -39,7 +41,7 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
             )}
           >
             <Eye className="w-5 h-5 mr-2" />
-            Watching<span className="ml-2">12</span>
+            Watching<span className="ml-2">{user?.watchings.length}</span>
           </TabsTrigger>
           <TabsTrigger
             value="toWatch"

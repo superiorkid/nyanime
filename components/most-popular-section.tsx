@@ -2,12 +2,14 @@ import AnimeCard from "@/components/anime-card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Data } from "@/types/Anime";
-import { User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
 
 interface MostPopularSectionProps {
   collections: Data[];
-  user: User | null;
+  user: Prisma.UserGetPayload<{
+    include: { watchings: { include: { anime: true } } };
+  }> | null;
 }
 
 const MostPopularSection = ({ collections, user }: MostPopularSectionProps) => {
@@ -20,7 +22,7 @@ const MostPopularSection = ({ collections, user }: MostPopularSectionProps) => {
           {collections.map((anime, index) => (
             <AnimeCard
               key={index}
-              isAuth={!!user}
+              user={user}
               malId={anime.mal_id}
               genre={anime.genres.at(0)?.name!}
               image_url={anime.images.webp.large_image_url}

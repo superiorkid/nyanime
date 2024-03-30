@@ -57,9 +57,15 @@ const OverviewTabsContent = ({ anime }: OverviewTabsContentProps) => {
         </Table>
       </aside>
       <main className="flex-1 prose prose-lg prose-h1:text-xl prose-h1:font-semibold prose-h1:text-background prose-p:text-zinc-400">
-        <h1>Desciption</h1>
-
+        <h1>Synopsis</h1>
         <p>{anime.synopsis}</p>
+
+        {anime.background && (
+          <>
+            <h1>Background</h1>
+            <p>{anime.background}</p>
+          </>
+        )}
       </main>
     </div>
   );

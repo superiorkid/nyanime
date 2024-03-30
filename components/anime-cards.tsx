@@ -1,11 +1,13 @@
 import AnimeCard from "@/components/anime-card";
 import { AnimeSearch } from "@/types/AnimeSearch";
 import PaginationButton from "@/components/pagination-button";
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 
 interface AnimeCardsProps {
   collections: AnimeSearch;
-  user: User | null;
+  user: Prisma.UserGetPayload<{
+    include: { watchings: { include: { anime: true } } };
+  }> | null;
 }
 
 const AnimeCards = ({ collections, user }: AnimeCardsProps) => {
@@ -15,7 +17,7 @@ const AnimeCards = ({ collections, user }: AnimeCardsProps) => {
         {collections.data.map((anime, index) => (
           <AnimeCard
             key={index}
-            isAuth={!!user}
+            user={user}
             malId={anime.mal_id}
             title={anime.title}
             releasedYear={anime.year!}
