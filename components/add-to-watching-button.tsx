@@ -36,15 +36,15 @@ const AddToWatchingButton = ({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    startTransition(() => {
-      addToWatchingList({
+    startTransition(async () => {
+      await addToWatchingList({
         genre,
         malId,
         releasedYear,
         score,
         title,
         imageUrl: image_url,
-      }).then(() => {
+      }).then((_) => {
         router.refresh();
       });
     });

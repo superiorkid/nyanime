@@ -1,9 +1,10 @@
 import { getCurrentUser } from "@/actions/user.action";
 import Container from "@/components/container";
 import LibraryTabs from "@/components/library-tabs";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Settings2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface LibraryLayoutProps {
@@ -18,9 +19,12 @@ const LibraryLayout = async ({ children }: LibraryLayoutProps) => {
       <section className="h-[20dvh] relative">
         <Image
           fill
+          priority
           src="https://images.unsplash.com/photo-1480796927426-f609979314bd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="user background"
           className="object-cover -z-10 brightness-50 saturate-50"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          decoding="async"
         />
 
         <Container className="grid grid-cols-2">
@@ -31,13 +35,16 @@ const LibraryLayout = async ({ children }: LibraryLayoutProps) => {
             <div>
               <h1 className="text-3xl font-medium">
                 Moh. iLhamuddin
-                <Button
-                  className="inline-flex ml-2 p-0"
-                  size="icon"
-                  variant="ghost"
+                <Link
+                  href={`/${user?.username}/settings/account`}
+                  className={buttonVariants({
+                    className: "inline-flex ml-2 p-0",
+                    size: "sm",
+                    variant: "ghost",
+                  })}
                 >
                   <Settings2 className="w-5 h-5" />
-                </Button>
+                </Link>
               </h1>
               <p className="text-zinc-200">
                 <span>20 Followers</span> | <span>8 Following</span>
