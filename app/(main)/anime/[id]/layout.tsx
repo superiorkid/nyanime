@@ -40,6 +40,10 @@ const AnimeDetailLayout = async ({
           imageSrc={animeDetails.images.webp.large_image_url}
           score={animeDetails.score}
           title={animeDetails.title}
+          user={user}
+          genre={animeDetails.genres.at(0)!.name}
+          malId={animeDetails.mal_id}
+          releaseYear={animeDetails.year!}
         />
 
         <div className="mb-12">

@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
 
-interface ChangeStatusProps {
+interface ChangeStatusProps extends React.ComponentPropsWithoutRef<"button"> {
   title: string;
   releasedYear: number;
   genre: string;
@@ -21,18 +21,21 @@ interface ChangeStatusProps {
   buttonSize?: "default" | "sm" | "lg" | "icon" | null | undefined;
 }
 
-const ChangeStatus = ({
-  genre,
-  image_url,
-  malId,
-  releasedYear,
-  score,
-  title,
-  children,
-  isActive,
-  status,
-  buttonSize = "default",
-}: ChangeStatusProps) => {
+const ChangeStatus = (props: ChangeStatusProps) => {
+  const {
+    genre,
+    image_url,
+    malId,
+    releasedYear,
+    score,
+    title,
+    children,
+    isActive,
+    status,
+    buttonSize = "default",
+    className,
+  } = props;
+
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -58,6 +61,7 @@ const ChangeStatus = ({
       size={buttonSize}
       className={cn(
         "rounded-full h-12 w-12 group/like-btn",
+        className,
         isActive && "bg-emerald-500 hover:bg-emerald-500/50"
       )}
       onClick={changeStatusHandler}
