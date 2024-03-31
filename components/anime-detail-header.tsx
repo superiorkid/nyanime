@@ -109,7 +109,7 @@ const AnimeDetailHeader = ({
               </>
             </ChangeStatus>
           </div>
-          <div>
+          {/* <div>
             <Button
               variant="secondary"
               size="lg"
@@ -118,7 +118,7 @@ const AnimeDetailHeader = ({
               <Plus className="w-5 h-5 mr-2" />
               Add to collection
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

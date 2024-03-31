@@ -153,3 +153,19 @@ export async function addUserAnimeStatus({
     throw new Error((error as Error).message);
   }
 }
+
+
+export async function deleteAccount(userId: string) {
+  try {
+
+    cookies().delete("token")
+    await prisma.user.delete({ where: { id: userId } })
+
+    return {
+      message: 'delete your account successfully'
+    }
+  } catch (error) {
+    console.error((error as Error).message)
+    throw new Error((error as Error).message)
+  }
+}

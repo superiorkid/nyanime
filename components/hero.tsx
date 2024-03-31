@@ -27,14 +27,14 @@ const Hero = ({ title, synopsis, malId }: HeroProps) => {
             >
               Learn More
             </Link>
-            <Button
+            {/* <Button
               variant="secondary"
               size="lg"
               className="font-semibold bg-foreground text-background hover:bg-muted-foreground"
             >
               <Bookmark className="w-5 h-5 mr-2" />
               To Watch
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

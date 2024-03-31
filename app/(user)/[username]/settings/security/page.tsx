@@ -1,13 +1,15 @@
+import { getCurrentUser } from "@/actions/user.action";
+import DeleteAccountButton from "@/components/delete-account-button";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
-import { ChevronRight, Shield, X } from "lucide-react";
-import React from "react";
+import { Shield } from "lucide-react";
 
-const SecurityPage = () => {
+const SecurityPage = async () => {
+  const user = await getCurrentUser();
+
   return (
     <>
       <Breadcrumb>
@@ -33,10 +35,7 @@ const SecurityPage = () => {
           <div className="flex flex-col space-y-2">
             <p>Delete Account can erase your data. be careful!</p>
             <div className="">
-              <Button variant="destructive">
-                <X className="w-5 h-5 mr-2" />
-                Delete Account
-              </Button>
+              <DeleteAccountButton userId={user!.id} />
             </div>
           </div>
         </div>
