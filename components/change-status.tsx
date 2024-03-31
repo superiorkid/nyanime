@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { AnimeStatus } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useTransition } from "react";
+import React, { useOptimistic, useTransition } from "react";
 
 interface ChangeStatusProps extends React.ComponentPropsWithoutRef<"button"> {
   title: string;
@@ -38,22 +38,25 @@ const ChangeStatus = (props: ChangeStatusProps) => {
 
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const [optimisticState, addOptimistic] = useOptimistic(
+    isActive,
+    (currentState, opotimisticValue) => !currentState
+  );
 
-  const changeStatusHandler = (
+  const changeStatusHandler = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    startTransition(async () => {
-      await addUserAnimeStatus({
-        genre,
-        title,
-        score,
-        malId,
-        releasedYear,
-        status,
-        imageUrl: image_url,
-      }).then(() => router.refresh());
-    });
+    addOptimistic(isActive);
+    await addUserAnimeStatus({
+      genre,
+      title,
+      score,
+      malId,
+      releasedYear,
+      status,
+      imageUrl: image_url,
+    }).then(() => router.refresh());
   };
 
   return (
@@ -62,7 +65,7 @@ const ChangeStatus = (props: ChangeStatusProps) => {
       className={cn(
         "rounded-full h-12 w-12 group/like-btn",
         className,
-        isActive && "bg-emerald-500 hover:bg-emerald-500/50"
+        optimisticState && "bg-emerald-500 hover:bg-emerald-500/50"
       )}
       onClick={changeStatusHandler}
       disabled={isPending}
