@@ -50,8 +50,8 @@ const UserButton = ({ user }: UserButtonProps) => {
             <span className="text-lg">MI</span>
           </div>
           <div>
-            <h1 className="text-lg font-medium">Moh. Ilhamuddin</h1>
-            <h3 className="text-zinc-500">mohammad.ilhamuddin@gmail.com</h3>
+            <h1 className="text-lg font-medium">{user?.username}</h1>
+            <h3 className="text-zinc-500">{user?.email}</h3>
           </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

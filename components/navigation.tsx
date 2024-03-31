@@ -11,8 +11,7 @@ import UserButton from "./user-button";
 interface NavigationProps {
   user: Prisma.UserGetPayload<{
     include: {
-      toWatch: { include: { anime: true } };
-      watchings: { include: { anime: true } };
+      animeStatus: { include: { anime: true } };
     };
   }> | null;
 }

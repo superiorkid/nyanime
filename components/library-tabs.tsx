@@ -1,5 +1,6 @@
 "use client";
 
+import Container from "@/components/container";
 import {
   Select,
   SelectContent,
@@ -7,19 +8,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Prisma } from "@prisma/client";
 import { Bookmark, Check, Eye } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import Container from "./container";
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface LibraryTabsProps {
   user: Prisma.UserGetPayload<{
     include: {
-      watchings: { include: { anime: true } };
-      toWatch: { include: { anime: true } };
-      watched: { include: { anime: true } };
+      animeStatus: { include: { anime: true } };
     };
   }> | null;
 }
@@ -45,7 +43,13 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
             )}
           >
             <Eye className="w-5 h-5 mr-2" />
-            Watching<span className="ml-2">{user?.watchings.length}</span>
+            Watching
+            <span className="ml-2">
+              {
+                user?.animeStatus.filter((anime) => anime.status === "WATCHING")
+                  .length
+              }
+            </span>
           </TabsTrigger>
           <TabsTrigger
             value="toWatch"
@@ -60,7 +64,13 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
             )}
           >
             <Bookmark className="w-5 h-5 mr-2" />
-            To Watch<span className="ml-2">{user?.toWatch.length}</span>
+            To Watch
+            <span className="ml-2">
+              {
+                user?.animeStatus.filter((anime) => anime.status === "TO_WATCH")
+                  .length
+              }
+            </span>
           </TabsTrigger>
           <TabsTrigger
             value="watched"
@@ -75,7 +85,13 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
             )}
           >
             <Check className="w-5 h-5 mr-2" />
-            Watched<span className="ml-2">{user?.watched.length}</span>
+            Watched
+            <span className="ml-2">
+              {
+                user?.animeStatus.filter((anime) => anime.status === "WATCHED")
+                  .length
+              }
+            </span>
           </TabsTrigger>
           {/* <TabsTrigger
             value="collections"

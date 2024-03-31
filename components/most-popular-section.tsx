@@ -9,9 +9,7 @@ interface MostPopularSectionProps {
   collections: Data[];
   user: Prisma.UserGetPayload<{
     include: {
-      watchings: { include: { anime: true } };
-      toWatch: { include: { anime: true } };
-      watched: { include: { anime: true } };
+      animeStatus: { include: { anime: true } };
     };
   }> | null;
 }

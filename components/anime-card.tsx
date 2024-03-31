@@ -1,11 +1,10 @@
-import AddToWatchButton from "@/components/add-to-watch-button";
-import AddToWatchingButton from "@/components/add-to-watching-button";
-import AddWatchedButton from "@/components/add-watched-button";
+import ChangeStatus from "@/components/change-status";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Prisma } from "@prisma/client";
-import { Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { AnimeStatus, Prisma } from "@prisma/client";
+import { Bookmark, Check, Eye, Star, ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,9 +17,7 @@ interface AnimeCardProps {
   score: number;
   user: Prisma.UserGetPayload<{
     include: {
-      watchings: { include: { anime: true } };
-      toWatch: { include: { anime: true } };
-      watched: { include: { anime: true } };
+      animeStatus: { include: { anime: true } };
     };
   }> | null;
 }
@@ -56,33 +53,75 @@ const AnimeCard = ({
 
             {user ? (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-1.5">
-                <AddToWatchButton
-                  title={title}
-                  releasedYear={releasedYear}
+                <ChangeStatus
+                  buttonSize="icon"
                   genre={genre}
                   image_url={image_url}
                   malId={malId}
-                  score={score}
-                  currentUserToWatch={user.toWatch}
-                />
-                <AddToWatchingButton
                   title={title}
+                  score={score}
                   releasedYear={releasedYear}
+                  status={AnimeStatus.TO_WATCH}
+                  isActive={
+                    user.animeStatus.find(({ anime }) => +anime.malId === malId)
+                      ?.status === "TO_WATCH"
+                  }
+                >
+                  <Bookmark
+                    className={cn(
+                      "w-5 h-5 stroke-zinc-400 group-hover/dislike-btn:stroke-background",
+                      user.animeStatus.find(
+                        ({ anime }) => +anime.malId === malId
+                      )?.status === "TO_WATCH" && "stroke-foreground"
+                    )}
+                  />
+                </ChangeStatus>
+                <ChangeStatus
+                  buttonSize="icon"
                   genre={genre}
                   image_url={image_url}
                   malId={malId}
-                  score={score}
-                  currentUserWatchings={user.watchings}
-                />
-                <AddWatchedButton
                   title={title}
+                  score={score}
                   releasedYear={releasedYear}
+                  status={AnimeStatus.WATCHING}
+                  isActive={
+                    user.animeStatus.find(({ anime }) => +anime.malId === malId)
+                      ?.status === "WATCHING"
+                  }
+                >
+                  <Eye
+                    className={cn(
+                      "w-5 h-5 stroke-zinc-400 group-hover/like-btn:stroke-background",
+                      user.animeStatus.find(
+                        ({ anime }) => +anime.malId === malId
+                      )?.status === "WATCHING" && "stroke-foregrond"
+                    )}
+                  />
+                </ChangeStatus>
+                <ChangeStatus
+                  buttonSize="icon"
                   genre={genre}
                   image_url={image_url}
                   malId={malId}
+                  title={title}
                   score={score}
-                  currentUserWatced={user.watched}
-                />
+                  releasedYear={releasedYear}
+                  status={AnimeStatus.WATCHED}
+                  isActive={
+                    user.animeStatus.find(({ anime }) => +anime.malId === malId)
+                      ?.status === "WATCHED"
+                  }
+                >
+                  <Check
+                    className={cn(
+                      "w-5 h-5 stroke-zinc-400 group-hover/dislike-btn:stroke-background",
+                      user.animeStatus.find(
+                        ({ anime }) => +anime.malId === malId
+                      )?.status === "WATCHED" && "stroke-foreground"
+                    )}
+                  />
+                </ChangeStatus>
               </div>
             ) : (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-3">

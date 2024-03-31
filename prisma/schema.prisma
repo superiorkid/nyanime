@@ -21,9 +21,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  watchings Watching[]
-  toWatch   ToWatch[]
-  watched   Watched[]
+  animeStatus UserAnimeStatus[]
 }
 
 model Anime {
@@ -35,44 +33,25 @@ model Anime {
   genre       String
   rating      String
 
-  watchings Watching[]
-  toWatch   ToWatch[]
-  watched   Watched[]
+  animeStatus UserAnimeStatus[]
 
   @@index([title, rating])
 }
 
-model Watching {
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model UserAnimeStatus {
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String
-  anime      Anime    @relation(fields: [animeId], references: [id])
+  anime      Anime       @relation(fields: [animeId], references: [id])
   animeId    String
-  assignedAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  status     AnimeStatus
+  assignedAt DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 
   @@id([userId, animeId])
 }
 
-model ToWatch {
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  anime   Anime  @relation(fields: [animeId], references: [id])
-  animeId String
-
-  assignedAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@id([userId, animeId])
-}
-
-model Watched {
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  anime   Anime  @relation(fields: [animeId], references: [id])
-  animeId String
-
-  assignedAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@id([userId, animeId])
+enum AnimeStatus {
+  WATCHING
+  TO_WATCH
+  WATCHED
 }

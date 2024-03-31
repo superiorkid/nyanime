@@ -111,5 +111,5 @@ function getToken() {
 export async function getSession() {
     const token = getToken()
     const payload = jwt.verify(token?.value!, process.env.SECRET_KEY as string)
-    return payload as { sub: string, username: string }
+    return payload as { sub: string, username: string, iat: number, exp: number }
 }

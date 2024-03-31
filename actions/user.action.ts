@@ -3,6 +3,7 @@
 import { getSession } from "@/actions/authentication.action";
 import prisma from "@/lib/prisma";
 import { EditUser } from "@/lib/schemas/edit-user.schema";
+import { AnimeStatus } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -16,17 +17,7 @@ export async function getCurrentUser() {
         username: session?.username,
       },
       include: {
-        watchings: {
-          include: {
-            anime: true
-          }
-        },
-        toWatch: {
-          include: {
-            anime: true
-          }
-        },
-        watched: { include: { anime: true } }
+        animeStatus: { include: { anime: true } }
       }
     });
 
@@ -81,13 +72,14 @@ export async function editUser(values: EditUser) {
   }
 }
 
-export async function addToWatchingList({
+export async function addUserAnimeStatus({
   genre,
   imageUrl,
   malId,
   releasedYear,
   score,
   title,
+  status
 }: {
   genre: string;
   imageUrl: string;
@@ -95,6 +87,7 @@ export async function addToWatchingList({
   releasedYear: number;
   score: number;
   title: string;
+  status: AnimeStatus
 }) {
   try {
     const currentUser = await getCurrentUser()
@@ -118,23 +111,34 @@ export async function addToWatchingList({
       })
     }
 
-    const isInWatchlist = await prisma.watching.findFirst({
+    const animeStatus = await prisma.userAnimeStatus.findFirst({
       where: {
         userId: currentUser?.id,
         animeId: anime.id
       }
     })
 
-    if (!isInWatchlist) {
-      // If the anime is not in the watchlist, add it
-      await prisma.watching.create({
+    if (!animeStatus) {
+      await prisma.userAnimeStatus.create({
         data: {
+          status,
           userId: currentUser!.id,
           animeId: anime.id
         }
       })
+    }
+
+    if (status !== animeStatus?.status) {
+      await prisma.userAnimeStatus.update({
+        where: {
+          userId_animeId: { animeId: anime.id, userId: currentUser!.id }
+        },
+        data: {
+          status
+        }
+      })
     } else {
-      await prisma.watching.delete({
+      await prisma.userAnimeStatus.delete({
         where: {
           userId_animeId: { animeId: anime.id, userId: currentUser!.id }
         }
@@ -142,147 +146,7 @@ export async function addToWatchingList({
     }
 
     return {
-      message: "Remove anime from watching list successfully"
-    }
-  } catch (error) {
-    console.error((error as Error).message);
-    throw new Error((error as Error).message);
-  }
-}
-
-export async function addToWatchList({
-  genre,
-  imageUrl,
-  malId,
-  releasedYear,
-  score,
-  title,
-}: {
-  genre: string;
-  imageUrl: string;
-  malId: number;
-  releasedYear: number;
-  score: number;
-  title: string;
-}) {
-  try {
-    const currentUser = await getCurrentUser()
-
-    let anime = await prisma.anime.findFirst({
-      where: {
-        malId: String(malId)
-      }
-    })
-
-    if (!anime) {
-      anime = await prisma.anime.create({
-        data: {
-          malId: String(malId),
-          title,
-          images: imageUrl,
-          releaseYear: String(releasedYear),
-          genre,
-          rating: String(score)
-        }
-      })
-    }
-
-    const isInToWatchlist = await prisma.toWatch.findFirst({
-      where: {
-        userId: currentUser?.id,
-        animeId: anime.id
-      }
-    })
-
-    if (!isInToWatchlist) {
-      // If the anime is not in the watchlist, add it
-      await prisma.toWatch.create({
-        data: {
-          userId: currentUser!.id,
-          animeId: anime.id
-        }
-      })
-    } else {
-      await prisma.toWatch.delete({
-        where: {
-          userId_animeId: { animeId: anime.id, userId: currentUser!.id }
-        }
-      })
-    }
-
-    return {
-      message: "Remove anime from to watch list successfully"
-    }
-  } catch (error) {
-    console.error((error as Error).message);
-    throw new Error((error as Error).message);
-  }
-
-}
-
-
-export async function addToWatchedList({
-  genre,
-  imageUrl,
-  malId,
-  releasedYear,
-  score,
-  title,
-}: {
-  genre: string;
-  imageUrl: string;
-  malId: number;
-  releasedYear: number;
-  score: number;
-  title: string;
-}) {
-  try {
-    const currentUser = await getCurrentUser()
-
-    let anime = await prisma.anime.findFirst({
-      where: {
-        malId: String(malId)
-      }
-    })
-
-    if (!anime) {
-      anime = await prisma.anime.create({
-        data: {
-          malId: String(malId),
-          title,
-          images: imageUrl,
-          releaseYear: String(releasedYear),
-          genre,
-          rating: String(score)
-        }
-      })
-    }
-
-    const isInToWatchedlist = await prisma.watched.findFirst({
-      where: {
-        userId: currentUser?.id,
-        animeId: anime.id
-      }
-    })
-
-    if (!isInToWatchedlist) {
-      // If the anime is not in the watchlist, add it
-      await prisma.watched.create({
-        data: {
-          userId: currentUser!.id,
-          animeId: anime.id
-        }
-      })
-    } else {
-      await prisma.watched.delete({
-        where: {
-          userId_animeId: { animeId: anime.id, userId: currentUser!.id }
-        }
-      })
-    }
-
-    return {
-      message: "Remove anime from watched list successfully"
+      message: `Remove anime from ${status} list successfully`
     }
   } catch (error) {
     console.error((error as Error).message);

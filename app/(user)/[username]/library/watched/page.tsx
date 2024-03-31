@@ -9,20 +9,23 @@ const WatchedPage = async () => {
 
   return (
     <Container>
-      {user!.watchings.length > 0 ? (
+      {user!.animeStatus.filter((anime) => anime.status === "WATCHED").length >
+      0 ? (
         <div className="grid grid-cols-6 gap-4">
-          {user?.watched.map(({ anime }, index) => (
-            <AnimeCard
-              key={index}
-              genre={anime.genre}
-              image_url={anime.images}
-              malId={Number(anime.malId)}
-              releasedYear={Number(anime.releaseYear)}
-              title={anime.title}
-              score={Number(anime.rating)}
-              user={user}
-            />
-          ))}
+          {user?.animeStatus
+            .filter((anime) => anime.status === "WATCHED")
+            .map(({ anime }, index) => (
+              <AnimeCard
+                key={index}
+                genre={anime.genre}
+                image_url={anime.images}
+                malId={Number(anime.malId)}
+                releasedYear={Number(anime.releaseYear)}
+                title={anime.title}
+                score={Number(anime.rating)}
+                user={user}
+              />
+            ))}
         </div>
       ) : (
         <Alert variant="destructive">
