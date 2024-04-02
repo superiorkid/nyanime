@@ -42,8 +42,17 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
           } else {
             params.append(name, value);
           }
+
+          if (params.has("page")) {
+            params.delete("page");
+          }
+
           break;
         default:
+          if (params.has("page")) {
+            params.delete("page");
+          }
+
           if (!value || params.get(name) === value) {
             params.delete(name);
           } else {

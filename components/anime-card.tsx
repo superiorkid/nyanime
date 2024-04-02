@@ -52,7 +52,7 @@ const AnimeCard = ({
               {score}
             </Badge>
 
-            {user ? (
+            {user && (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-1.5">
                 <ChangeStatus
                   buttonSize="icon"
@@ -123,21 +123,6 @@ const AnimeCard = ({
                     )}
                   />
                 </ChangeStatus>
-              </div>
-            ) : (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 text-background text-sm opacity-0 transition-opacity group-hover/card:opacity-100 flex space-x-3">
-                <Button
-                  size="icon"
-                  className="rounded-full h-12 w-12 group/like-btn"
-                >
-                  <ThumbsUp className="w-5 h-5 stroke-zinc-400 group-hover/like-btn:stroke-background" />
-                </Button>
-                <Button
-                  size="icon"
-                  className="rounded-full h-12 w-12 group/dislike-btn"
-                >
-                  <ThumbsDown className="w-5 h-5 stroke-zinc-400 group-hover/dislike-btn:stroke-background" />
-                </Button>
               </div>
             )}
 

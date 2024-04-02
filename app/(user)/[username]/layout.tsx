@@ -11,6 +11,10 @@ interface UserLayoutProps {
 const UserLayout = async ({ children }: UserLayoutProps) => {
   const user = await getCurrentUser();
 
+  if (!user) {
+    notFound();
+  }
+
   return (
     <>
       <Navigation user={user} />

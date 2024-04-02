@@ -36,7 +36,8 @@ function PaginationButton({ paginationOptions }: PaginationButtonProps) {
             createQueryString(
               "page",
               (paginationOptions.current_page + 1).toString()
-            )
+            ),
+          { scroll: true }
         )
       }
     >
