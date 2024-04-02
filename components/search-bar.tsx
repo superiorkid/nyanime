@@ -50,7 +50,7 @@ const SearchBar = () => {
       </div>
 
       {debouncedSearchTerm && (
-        <div className="absolute pt-64 h-[430px] w-[400px]">
+        <div className="absolute pt-64 h-[430px] w-[400px] z-50">
           <Card>
             <CardContent className="p-3">
               <div className="flex flex-col space-y-1.5">
