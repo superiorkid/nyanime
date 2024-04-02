@@ -15,43 +15,44 @@ const OverviewTabsContent = ({ anime }: OverviewTabsContentProps) => {
           <TableBody>
             <TableRow className="border-none h-6">
               <TableCell className="text-zinc-400">Type</TableCell>
-              <TableCell>{anime.type}</TableCell>
+              <TableCell>{anime.type ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Episodes</TableCell>
-              <TableCell>{anime.episodes}</TableCell>
+              <TableCell>{anime.episodes ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Genres</TableCell>
               <TableCell>
-                {anime.genres.map((genre) => genre.name).join(", ")}
+                {anime.genres.map((genre) => genre.name).join(", ") ??
+                  "Unknown"}
               </TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Aired</TableCell>
-              <TableCell>{anime.aired.string}</TableCell>
+              <TableCell>{anime.aired.string ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Status</TableCell>
-              <TableCell>{anime.status}</TableCell>
+              <TableCell>{anime.status ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Season</TableCell>
               <TableCell>
-                {anime.season} {anime.year}
+                {anime.season ?? "Unknown"} {anime.year ?? "Unknown"}
               </TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Studios</TableCell>
-              <TableCell>{anime.studios.at(0)?.name}</TableCell>
+              <TableCell>{anime.studios.at(0)?.name ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Rating</TableCell>
-              <TableCell>{anime.rating}</TableCell>
+              <TableCell>{anime.rating ?? "Unknown"}</TableCell>
             </TableRow>
             <TableRow className="border-none">
               <TableCell className="text-zinc-400">Duration</TableCell>
-              <TableCell>{anime.duration}</TableCell>
+              <TableCell>{anime.duration ?? "Unknown"}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

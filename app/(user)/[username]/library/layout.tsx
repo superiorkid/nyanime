@@ -34,7 +34,7 @@ const LibraryLayout = async ({ children }: LibraryLayoutProps) => {
             </div>
             <div>
               <h1 className="text-3xl font-medium">
-                Moh. iLhamuddin
+                {user?.username}
                 <Link
                   href={`/${user?.username}/settings/account`}
                   className={buttonVariants({
@@ -46,9 +46,7 @@ const LibraryLayout = async ({ children }: LibraryLayoutProps) => {
                   <Settings2 className="w-5 h-5" />
                 </Link>
               </h1>
-              <p className="text-zinc-200">
-                <span>20 Followers</span> | <span>8 Following</span>
-              </p>
+              <p className="text-zinc-200">{user?.email}</p>
             </div>
           </div>
         </Container>

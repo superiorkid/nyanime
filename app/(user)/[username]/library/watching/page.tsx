@@ -4,7 +4,13 @@ import Container from "@/components/container";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
 
-const WatchingPage = async () => {
+interface WatchingPageProps {
+  searchParams: {
+    sort?: string;
+  };
+}
+
+const WatchingPage = async ({ searchParams: { sort } }: WatchingPageProps) => {
   const user = await getCurrentUser();
 
   return (
@@ -14,6 +20,24 @@ const WatchingPage = async () => {
         <div className="grid grid-cols-6 gap-4">
           {user?.animeStatus
             .filter((anime) => anime.status === "WATCHING")
+            .sort((a, b) => {
+              switch (sort) {
+                case "name-asc":
+                  return a.anime.title > b.anime.title ? 1 : -1;
+                case "name-desc":
+                  return b.anime.title > a.anime.title ? 1 : -1;
+                case "year-asc":
+                  return new Date(a.anime.releaseYear) > new Date(b.anime.title)
+                    ? -1
+                    : 1;
+                case "year-desc":
+                  return new Date(b.anime.releaseYear) > new Date(a.anime.title)
+                    ? 1
+                    : -1;
+                default:
+                  return 0;
+              }
+            })
             .map(({ anime }, index) => (
               <AnimeCard
                 key={index}

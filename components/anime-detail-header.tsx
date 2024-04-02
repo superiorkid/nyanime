@@ -1,7 +1,6 @@
 import ChangeStatus from "@/components/change-status";
-import { Button } from "@/components/ui/button";
 import { AnimeStatus, Prisma } from "@prisma/client";
-import { Bookmark, Check, Eye, Plus, Star } from "lucide-react";
+import { Bookmark, Check, Dna, Eye, Star } from "lucide-react";
 import Image from "next/image";
 
 interface AnimeDetailHeaderProps {
@@ -37,78 +36,84 @@ const AnimeDetailHeader = ({
             className="object-cover rounded-xl"
             decoding="async"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={75}
           />
         </div>
       </div>
       <div className="flex-1 space-y-8">
         <h1 className="text-5xl font-bold">{title}</h1>
-        <div className="font-medium">
-          <Star className="inline-flex items-center w-5 h-5 mr-2" />
-          {score}
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <ChangeStatus
-              image_url={imageSrc}
-              score={score}
-              title={title}
-              genre={genre}
-              malId={malId}
-              releasedYear={releaseYear}
-              status={AnimeStatus.WATCHING}
-              buttonSize="lg"
-              isActive={
-                user!.animeStatus.find(({ anime }) => +anime.malId === malId)
-                  ?.status === "WATCHING"
-              }
-              className="rounded-md h-11 w-auto"
-            >
-              <>
-                <Eye className="w-5 h-5 mr-2" />
-                Watching
-              </>
-            </ChangeStatus>
-            <ChangeStatus
-              image_url={imageSrc}
-              score={score}
-              title={title}
-              genre={genre}
-              malId={malId}
-              releasedYear={releaseYear}
-              status={AnimeStatus.TO_WATCH}
-              buttonSize="lg"
-              isActive={
-                user!.animeStatus.find(({ anime }) => +anime.malId === malId)
-                  ?.status === "TO_WATCH"
-              }
-              className="rounded-md h-11 w-auto"
-            >
-              <>
-                <Bookmark className="w-5 h-5 mr-2" />
-                To Watch
-              </>
-            </ChangeStatus>
-            <ChangeStatus
-              image_url={imageSrc}
-              score={score}
-              title={title}
-              genre={genre}
-              malId={malId}
-              releasedYear={releaseYear}
-              status={AnimeStatus.WATCHED}
-              buttonSize="lg"
-              isActive={
-                user!.animeStatus.find(({ anime }) => +anime.malId === malId)
-                  ?.status === "WATCHED"
-              }
-              className="rounded-md h-11 w-auto"
-            >
-              <>
-                <Check className="w-5 h-5 mr-2" />
-                Watched
-              </>
-            </ChangeStatus>
+        {score && (
+          <div className="font-medium">
+            <Star className="inline-flex items-center w-5 h-5 mr-2" />
+            {score}
           </div>
+        )}
+        <div className="flex items-center justify-between">
+          {user && (
+            <div className="flex items-center space-x-3">
+              <ChangeStatus
+                image_url={imageSrc}
+                score={score}
+                title={title}
+                genre={genre}
+                malId={malId}
+                releasedYear={releaseYear}
+                status={AnimeStatus.WATCHING}
+                buttonSize="lg"
+                isActive={
+                  user?.animeStatus.find(({ anime }) => +anime.malId === malId)
+                    ?.status === "WATCHING"
+                }
+                className="rounded-md h-11 w-auto"
+              >
+                <>
+                  <Eye className="w-5 h-5 mr-2" />
+                  Watching
+                </>
+              </ChangeStatus>
+              <ChangeStatus
+                image_url={imageSrc}
+                score={score}
+                title={title}
+                genre={genre}
+                malId={malId}
+                releasedYear={releaseYear}
+                status={AnimeStatus.TO_WATCH}
+                buttonSize="lg"
+                isActive={
+                  user?.animeStatus.find(({ anime }) => +anime.malId === malId)
+                    ?.status === "TO_WATCH"
+                }
+                className="rounded-md h-11 w-auto"
+              >
+                <>
+                  <Bookmark className="w-5 h-5 mr-2" />
+                  To Watch
+                </>
+              </ChangeStatus>
+              <ChangeStatus
+                image_url={imageSrc}
+                score={score}
+                title={title}
+                genre={genre}
+                malId={malId}
+                releasedYear={releaseYear}
+                status={AnimeStatus.WATCHED}
+                buttonSize="lg"
+                isActive={
+                  user?.animeStatus.find(({ anime }) => +anime.malId === malId)
+                    ?.status === "WATCHED"
+                }
+                className="rounded-md h-11 w-auto"
+              >
+                <>
+                  <Check className="w-5 h-5 mr-2" />
+                  Watched
+                </>
+              </ChangeStatus>
+            </div>
+          )}
+
           {/* <div>
             <Button
               variant="secondary"

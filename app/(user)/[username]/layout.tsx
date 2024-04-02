@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/actions/user.action";
 import Footer from "@/components/footer";
 import Navigation from "@/components/navigation";
+import { notFound } from "next/navigation";
 import React from "react";
 
 interface UserLayoutProps {

@@ -17,14 +17,6 @@ export function useSort() {
       },
       { id: "title-asc", label: "Title: A to Z", icon: ArrowUp },
       {
-        id: "episodes-desc",
-        label: "Episodes: High to Low",
-        icon: ArrowDown01,
-      },
-      { id: "episodes-asc", label: "Episodes: Low to High", icon: ArrowUp10 },
-      { id: "score-desc", label: "Score: High to Low", icon: ArrowUp10 },
-      { id: "score-asc", label: "Score Low to High", icon: ArrowUp10 },
-      {
         id: "popularity-desc",
         label: "Popularity: High to Low",
         icon: ArrowUp10,
@@ -34,6 +26,14 @@ export function useSort() {
         label: "Popularity: Low to High",
         icon: ArrowUp10,
       },
+      {
+        id: "episodes-desc",
+        label: "Episodes: High to Low",
+        icon: ArrowDown01,
+      },
+      { id: "episodes-asc", label: "Episodes: Low to High", icon: ArrowUp10 },
+      { id: "score-desc", label: "Score: High to Low", icon: ArrowUp10 },
+      { id: "score-asc", label: "Score Low to High", icon: ArrowUp10 },
     ],
     []
   );

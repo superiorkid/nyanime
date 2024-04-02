@@ -7,9 +7,20 @@ import {
 } from "@/components/ui/breadcrumb";
 import UsernameEdit from "@/components/username-edit";
 import { User } from "lucide-react";
+import { redirect } from "next/navigation";
 
-const AccountPage = async () => {
+interface AccountPageProps {
+  params: {
+    username: string;
+  };
+}
+
+const AccountPage = async ({ params: { username } }: AccountPageProps) => {
   const user = await getCurrentUser();
+
+  if (user?.username !== username) {
+    redirect(`/${user?.username}/settings/account`);
+  }
 
   return (
     <>

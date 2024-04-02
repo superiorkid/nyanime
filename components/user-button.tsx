@@ -28,7 +28,7 @@ const UserButton = ({ user }: UserButtonProps) => {
       signOutAction()
         .then((callback) => {
           toast.success(callback?.message);
-          router.refresh();
+          router.push("/");
         })
         .catch((_) => {
           toast.error("Logout failed");

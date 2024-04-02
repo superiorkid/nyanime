@@ -6,9 +6,20 @@ import {
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
 import { Shield } from "lucide-react";
+import { redirect } from "next/navigation";
 
-const SecurityPage = async () => {
+interface SecurityPageProps {
+  params: {
+    username: string;
+  };
+}
+
+const SecurityPage = async ({ params: { username } }: SecurityPageProps) => {
   const user = await getCurrentUser();
+
+  if (user?.username !== username) {
+    redirect(`/${user?.username}/settings/security`);
+  }
 
   return (
     <>

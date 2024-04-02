@@ -44,6 +44,7 @@ const AnimeCard = ({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               loading="lazy"
               decoding="async"
+              quality={75}
             />
 
             <Badge className="absolute h-9 top-0 left-1/2 -translate-x-1/2 rounded-x-none rounded-t-none rounded-b-md -mt-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">

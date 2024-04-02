@@ -41,7 +41,7 @@ export async function editUser(values: EditUser) {
       },
       data: {
         email: values.email,
-        username: values.username,
+        username: values.username?.replace(" ", "-"),
       },
     });
 

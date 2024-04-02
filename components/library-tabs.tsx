@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Prisma } from "@prisma/client";
 import { Bookmark, Check, Eye } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import LibrarySort from "./library-sort";
 
 interface LibraryTabsProps {
   user: Prisma.UserGetPayload<{
@@ -110,28 +111,8 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
           </TabsTrigger> */}
         </TabsList>
       </Tabs>
-      <div className="flex space-x-5 items-center">
-        <Select>
-          <SelectTrigger>
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent align="end">
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select>
-          <SelectTrigger>
-            <SelectValue placeholder="Filters" />
-          </SelectTrigger>
-          <SelectContent align="end">
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
+      <div>
+        <LibrarySort />
       </div>
     </Container>
   );

@@ -38,6 +38,7 @@ const StaffTabsContent = ({ staffs }: StaffTabsContentProps) => {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       loading="lazy"
                       decoding="async"
+                      quality={75}
                     />
 
                     <div className="absolute bottom-0 left-0 m-2 text-background text-sm">

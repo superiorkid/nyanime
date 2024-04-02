@@ -18,16 +18,18 @@ function NewsTabsContent({ news, animeId }: NewsTabsContentProps) {
     <>
       <div className="flex justify-between items-center border-b py-2">
         <h1 className="text-xl font-semibold">Latest News</h1>
-        <Link
-          href={`/news?malid=${animeId}`}
-          className={buttonVariants({
-            variant: "link",
-            className: "text-zinc-400",
-          })}
-        >
-          Read More
-          <ArrowRight className="w-5 h-5 ml-2" />
-        </Link>
+        {news.length > 5 && (
+          <Link
+            href={`/news?malid=${animeId}`}
+            className={buttonVariants({
+              variant: "link",
+              className: "text-zinc-400",
+            })}
+          >
+            Read More
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
+        )}
       </div>
 
       <div className="flex flex-col divide-y mt-3">
@@ -40,6 +42,9 @@ function NewsTabsContent({ news, animeId }: NewsTabsContentProps) {
                 alt={`${news.title} image`}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
+                quality={75}
+                decoding="async"
+                loading="lazy"
               />
             </div>
             <div className="flex-1">

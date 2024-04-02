@@ -23,8 +23,9 @@ const NewsPage = async ({ searchParams: { malid } }: NewsPageProps) => {
       <Container>
         <AnimeTopWallpaper imageUrl={news.data.at(0)?.images.jpg.image_url!} />
         <NewsHero
-          date={news.data.at(0)?.date!}
-          title={news.data.at(0)?.title!}
+          date={news.data.at(0)!.date!}
+          title={news.data.at(0)!.title!}
+          forumUrl={news.data.at(0)!.forum_url}
         />
         <News news={news.data.slice(1, news.data.length)} />
       </Container>
