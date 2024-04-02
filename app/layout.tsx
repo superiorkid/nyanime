@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import TanstackQueryProvider from "@/providers/tanstack-query-provider";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
           {children}
           <Toaster richColors expand />
         </TanstackQueryProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
