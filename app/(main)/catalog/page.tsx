@@ -7,6 +7,13 @@ import SidebarFilter from "@/components/sidebar-filter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ORDER_BY, SORT_BY, STATUS, TYPE } from "@/types/enums";
 import { Terminal } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Nyanime Catalog - Explore a Universe of Anime Titles",
+  description:
+    "Discover a universe of anime wonders in the Nyanime Catalog. Browse through our extensive list of anime titles, sorted by year, genre, studio, format, and airing status. Filter your search to find exactly what you're looking for and explore new favorites. Whether you're into action, romance, fantasy, or slice of life, Nyanime has something for everyone. Start exploring now and find your next obsession!",
+};
 
 interface CatalogPageProps {
   searchParams: {

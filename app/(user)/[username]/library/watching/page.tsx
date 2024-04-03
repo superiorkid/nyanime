@@ -3,6 +3,13 @@ import AnimeCard from "@/components/anime-card";
 import Container from "@/components/container";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Currently Watching - Nyanime",
+  description:
+    "Keep track of your currently watched anime on Nyanime. Stay updated on your progress and never miss a moment of your favorite shows. Organize your anime-watching experience effortlessly with Nyanime's user-friendly interface. Dive into your watching list and embark on exciting adventures with your favorite characters!",
+};
 
 interface WatchingPageProps {
   searchParams: {

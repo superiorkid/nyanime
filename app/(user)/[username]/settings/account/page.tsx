@@ -8,6 +8,13 @@ import {
 import UsernameEdit from "@/components/username-edit";
 import { User } from "lucide-react";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Manage Your Profile - Nyanime Account Settings",
+  description:
+    "Take control of your Nyanime profile with our Account Settings page. Update your username, email, and other profile details to personalize your Nyanime experience. Customize your profile to reflect your anime preferences and connect with like-minded fans. Manage your account effortlessly and unlock new features tailored to your interests.",
+};
 
 interface AccountPageProps {
   params: {

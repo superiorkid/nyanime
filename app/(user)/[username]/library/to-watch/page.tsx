@@ -3,6 +3,13 @@ import AnimeCard from "@/components/anime-card";
 import Container from "@/components/container";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Terminal } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "To Watch List - Nyanime",
+  description:
+    "Plan your anime-watching journey with Nyanime's 'To Watch' list. Discover upcoming titles, add them to your list, and never run out of new anime to explore. Whether you're seeking action-packed adventures or heartwarming stories, Nyanime has something for every anime enthusiast. Start building your ultimate to-watch list today!",
+};
 
 interface ToWatchpageProps {
   searchParams: {

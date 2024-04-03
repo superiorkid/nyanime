@@ -8,6 +8,13 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Join Nyanime - Unlock a World of Anime Wonders",
+  description:
+    "Ready to embark on your anime journey? Sign up for Nyanime and immerse yourself in a realm of captivating stories, vibrant characters, and thrilling adventures. Gain access to a vast library of anime content, personalized recommendations, and exciting community features. Start your anime odyssey with Nyanime now!",
+};
 
 function RegisterPage() {
   return (

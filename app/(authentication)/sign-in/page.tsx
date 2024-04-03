@@ -8,6 +8,13 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign In to Nyanime - Your Gateway to Anime Paradise",
+  description:
+    "Welcome back to Nyanime! Sign in to access your personalized anime recommendations, favorite shows, and exclusive content. Dive into a world of endless entertainment with our diverse collection of anime titles. Join our community of anime enthusiasts today!",
+};
 
 function SignInPage() {
   return (

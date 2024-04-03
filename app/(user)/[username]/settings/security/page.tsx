@@ -7,6 +7,13 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Shield } from "lucide-react";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Secure Your Account - Nyanime Security Settings",
+  description:
+    "Protect your Nyanime account with our Security Settings page. Safeguard your personal information and privacy by managing your account security settings. Take proactive measures to ensure the safety of your account and data. Explore options to enhance account security and peace of mind. In the Security Settings page, you also have the option to delete your account if needed.",
+};
 
 interface SecurityPageProps {
   params: {

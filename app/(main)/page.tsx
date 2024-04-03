@@ -6,6 +6,13 @@ import ForYouSection from "@/components/for-you-section";
 import Hero from "@/components/hero";
 import MostPopularSection from "@/components/most-popular-section";
 import TrendingNowSection from "@/components/trending-now-section";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Nyanime - Your Ultimate Destination for Anime Delights",
+  description:
+    "Welcome to Nyanime, your premier destination for everything anime! Explore our diverse collection of anime titles, handpicked just for you. Dive into our hero section for the latest releases, discover personalized recommendations in the 'Special for You' section, catch up on what's trending now, and explore our most popular picks. Join our vibrant community of anime lovers and start your anime adventure today!",
+};
 
 export default async function Home() {
   const [forYouSelection, trendingNow, mostPopular, user] = await Promise.all([

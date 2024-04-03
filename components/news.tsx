@@ -71,12 +71,12 @@ const News = ({ news }: NewsProps) => {
           </Card>
         ))}
       </div>
-      <Button
-        className="w-full bg-background text-foreground hover:bg-muted-foreground hover:text-background"
-        size="lg"
-      >
-        Show More
-      </Button>
+      {/*<Button*/}
+      {/*  className="w-full bg-background text-foreground hover:bg-muted-foreground hover:text-background"*/}
+      {/*  size="lg"*/}
+      {/*>*/}
+      {/*  Show More*/}
+      {/*</Button>*/}
     </section>
   );
 };
