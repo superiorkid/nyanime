@@ -2,11 +2,11 @@ import Container from "@/components/container";
 import Menu from "@/components/menu";
 import UserMenuDropdown from "@/components/user-menu-dropdown";
 import { cn } from "@/lib/utils";
-import { Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Link from "next/link";
-import SearchBar from "./search-bar";
-import { buttonVariants } from "./ui/button";
-import UserButton from "./user-button";
+import SearchBar from "@/components/search-bar";
+import { buttonVariants } from "@/components/ui/button";
+import UserButton from "@/components/user-button";
 
 interface NavigationProps {
   user: Prisma.UserGetPayload<{
@@ -22,7 +22,7 @@ const Navigation = ({ user }: NavigationProps) => {
       <Container className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div>
-            <h1 className="font-bold text-3xl font-sans">next-anime</h1>
+            <h1 className="font-bold text-3xl font-sans">nyanime</h1>
           </div>
           <Menu />
         </div>

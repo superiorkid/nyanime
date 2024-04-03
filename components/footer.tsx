@@ -9,7 +9,7 @@ const Footer = () => {
       <Container className="flex justify-between items-center">
         <div className="flex space-x-3.5 items-center">
           <Link href="/" className="font-medium">
-            next-anime.com
+            nyanime.vercel.app
           </Link>
           <Link href="#terms" className="text-zinc-400 text-sm">
             Terms & Privacy
