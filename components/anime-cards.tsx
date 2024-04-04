@@ -15,7 +15,7 @@ interface AnimeCardsProps {
 const AnimeCards = ({ collections, user }: AnimeCardsProps) => {
   return (
     <div className="flex-1 space-y-5">
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {collections.data.map((anime, index) => (
           <AnimeCard
             key={index}

@@ -19,9 +19,14 @@ import { useCallback } from "react";
 interface SidebarFilterProps {
   genres: GenreData[];
   producers: ProducerData[];
+  variant?: "MOBILE" | "DESKTOP";
 }
 
-const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
+const SidebarFilter = ({
+  genres,
+  producers,
+  variant = "DESKTOP",
+}: SidebarFilterProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -74,7 +79,7 @@ const SidebarFilter = ({ genres, producers }: SidebarFilterProps) => {
   );
 
   return (
-    <aside className="w-56">
+    <aside className={variant === "MOBILE" ? "w-full" : "w-56"}>
       <Accordion type="multiple">
         <AccordionItem value="year">
           <AccordionTrigger>Year</AccordionTrigger>

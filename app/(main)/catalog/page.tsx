@@ -6,8 +6,10 @@ import Container from "@/components/container";
 import SidebarFilter from "@/components/sidebar-filter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ORDER_BY, SORT_BY, STATUS, TYPE } from "@/types/enums";
-import { Terminal } from "lucide-react";
+import { Settings2, Terminal } from "lucide-react";
 import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import MobileSidebarFilter from "@/components/mobile-sidebar-filter";
 
 export const metadata: Metadata = {
   title: "Nyanime Catalog - Explore a Universe of Anime Titles",
@@ -76,12 +78,17 @@ const CatalogPage = async ({
   return (
     <div className="min-h-screen mt-8 mb-16">
       <Container>
+        <div className="lg:hidden mb-3.5">
+          <MobileSidebarFilter genres={genres.data} producers={studios.data} />
+        </div>
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold">Catalog</h1>
+          <h1 className="text-xl md:text-3xl font-bold">Catalog</h1>
           <AnimeSort />
         </div>
-        <div className="flex space-x-9">
-          <SidebarFilter genres={genres.data} producers={studios.data} />
+        <div className="flex lg:space-x-9">
+          <div className="hidden lg:block">
+            <SidebarFilter genres={genres.data} producers={studios.data} />
+          </div>
           {collections.data.length < 1 ? (
             <div className="w-full">
               <Alert variant="destructive">
