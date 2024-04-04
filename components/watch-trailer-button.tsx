@@ -18,7 +18,7 @@ const WatchTrailerButton = ({ url }: WatchTrailerButtonProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="absolute right-20 bottom-5 z-50 font-medium"
+          className="absolute lg:right-20 right-5 bottom-5 z-50 font-medium"
           size="lg"
           variant="secondary"
         >
@@ -26,8 +26,8 @@ const WatchTrailerButton = ({ url }: WatchTrailerButtonProps) => {
           Watch Trailer
         </Button>
       </DialogTrigger>
-      <DialogContent className="overflow-auto min-w-fit p-0 border-none">
-        <ReactPlayer url={url} width="1200px" height="700px" controls />
+      <DialogContent className="overflow-auto min-w-fit p-0 border-none aspect-video">
+        <ReactPlayer url={url} controls />
       </DialogContent>
     </Dialog>
   );

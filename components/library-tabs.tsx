@@ -28,7 +28,7 @@ const LibraryTabs = ({ user }: LibraryTabsProps) => {
   const pathanme = usePathname();
 
   return (
-    <Container className="my-5 flex justify-between items-center border-b py-2.5 border-muted-foreground">
+    <Container className="my-5 flex overflow-x-auto space-x-5 justify-between items-center border-b py-2.5 border-muted-foreground">
       <Tabs defaultValue="watching">
         <TabsList className="flex space-x-8 bg-foreground">
           <TabsTrigger

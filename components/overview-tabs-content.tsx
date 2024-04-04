@@ -7,7 +7,7 @@ interface OverviewTabsContentProps {
 
 const OverviewTabsContent = ({ anime }: OverviewTabsContentProps) => {
   return (
-    <div className="flex space-x-12">
+    <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-12">
       <aside className="w-80">
         <h1 className="text-xl font-semibold">Details</h1>
 
@@ -57,7 +57,7 @@ const OverviewTabsContent = ({ anime }: OverviewTabsContentProps) => {
           </TableBody>
         </Table>
       </aside>
-      <main className="flex-1 prose prose-lg prose-h1:text-xl prose-h1:font-semibold prose-h1:text-background prose-p:text-zinc-400">
+      <main className="flex-1 prose md:prose-lg prose-h1:text-xl prose-h1:font-semibold prose-h1:text-background prose-p:text-zinc-400">
         <h1>Synopsis</h1>
         <p>{anime.synopsis}</p>
 

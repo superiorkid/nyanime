@@ -24,7 +24,7 @@ const ToWatchpage = async ({ searchParams: { sort } }: ToWatchpageProps) => {
     <Container>
       {user!.animeStatus.filter((anime) => anime.status === "TO_WATCH").length >
       0 ? (
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {user?.animeStatus
             .filter((anime) => anime.status === "TO_WATCH")
             .sort((a, b) => {

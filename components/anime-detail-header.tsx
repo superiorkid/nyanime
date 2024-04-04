@@ -25,8 +25,8 @@ const AnimeDetailHeader = ({
   user,
 }: AnimeDetailHeaderProps) => {
   return (
-    <section className="mt-36 flex space-x-6 items-center mb-12">
-      <div className="w-96">
+    <section className="lg:mt-36 mt-72 flex lg:space-x-6 items-center mb-12">
+      <div className="w-96 hidden lg:flex">
         <div className="relative h-[28rem] w-80 shadow">
           <Image
             fill
@@ -41,7 +41,7 @@ const AnimeDetailHeader = ({
         </div>
       </div>
       <div className="flex-1 space-y-8">
-        <h1 className="text-5xl font-bold">{title}</h1>
+        <h1 className="text-3xl lg:text-5xl font-bold">{title}</h1>
         {score && (
           <div className="font-medium">
             <Star className="inline-flex items-center w-5 h-5 mr-2" />
@@ -50,7 +50,7 @@ const AnimeDetailHeader = ({
         )}
         <div className="flex items-center justify-between">
           {user && (
-            <div className="flex items-center space-x-3">
+            <div className="grid grid-cols-3 gap-2">
               <ChangeStatus
                 image_url={imageSrc}
                 score={score}

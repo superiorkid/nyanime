@@ -10,7 +10,7 @@ const MenuTabs = () => {
   const router = useRouter();
 
   return (
-    <Tabs defaultValue="overview">
+    <Tabs defaultValue="overview" className="overflow-x-auto">
       <TabsList className="space-x-8 bg-secondary-foreground h-14 mb-8">
         {tabs.map((tab, index) => (
           <TabsTrigger
