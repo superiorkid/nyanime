@@ -21,7 +21,7 @@ function RegisterPage() {
     <Card className="w-[428px]">
       <CardHeader>
         <CardTitle>
-          <Link href="/">Next-anime</Link>
+          <Link href="/">Nyanime</Link>
         </CardTitle>
         <CardDescription>Sign up to continue using this app</CardDescription>
       </CardHeader>

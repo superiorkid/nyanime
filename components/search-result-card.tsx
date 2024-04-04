@@ -40,7 +40,7 @@ const SearchResultCard = ({
           />
         </div>
         <div className="flex-1 justify-between items-center text-sm font-medium flex">
-          <p className="flex-1">{title}</p>
+          <p className="flex-1 line-clamp-2">{title}</p>
           <p className="text-zinc-500 w-10 text-right">{year}</p>
         </div>
       </div>

@@ -5,8 +5,10 @@ import { cn } from "@/lib/utils";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import SearchBar from "@/components/search-bar";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import UserButton from "@/components/user-button";
+import { AlignRight } from "lucide-react";
+import MobileMenu from "@/components/mobile-menu";
 
 interface NavigationProps {
   user: Prisma.UserGetPayload<{
@@ -22,18 +24,27 @@ const Navigation = ({ user }: NavigationProps) => {
       <Container className="flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <div>
-            <h1 className="font-bold text-3xl font-sans">nyanime</h1>
+            <h1 className="font-bold text-2xl lg:text-3xl font-sans">
+              nyanime
+            </h1>
           </div>
-          <Menu />
+          <div className="hidden lg:block">
+            <Menu />
+          </div>
         </div>
+
         <div className="flex space-x-1 items-center">
           <SearchBar />
 
+          <div className="md:hidden">
+            <MobileMenu user={user} />
+          </div>
+
           {!!user ? (
-            <>
+            <div className="hidden md:flex">
               <UserMenuDropdown user={user} />
               <UserButton user={user} />
-            </>
+            </div>
           ) : (
             <>
               <Link
@@ -41,7 +52,7 @@ const Navigation = ({ user }: NavigationProps) => {
                 className={cn(
                   buttonVariants({
                     className: cn(
-                      "font-semibold bg-foreground text-background hover:bg-muted-foreground z-10"
+                      "font-semibold bg-foreground text-background hover:bg-muted-foreground z-10 hidden md:flex"
                     ),
                     variant: "secondary",
                     size: "lg",
@@ -54,7 +65,7 @@ const Navigation = ({ user }: NavigationProps) => {
                 href="/sign-up"
                 className={cn(
                   buttonVariants({
-                    className: cn("font-semibold z-10"),
+                    className: cn("font-semibold z-10 hidden md:flex"),
                     variant: "secondary",
                     size: "lg",
                   })

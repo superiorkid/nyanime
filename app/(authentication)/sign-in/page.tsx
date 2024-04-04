@@ -21,7 +21,7 @@ function SignInPage() {
     <Card className="w-[428px]">
       <CardHeader>
         <CardTitle>
-          <Link href="/">Next-anime</Link>
+          <Link href="/">Nyanime</Link>
         </CardTitle>
         <CardDescription>Sign in to continue using this app</CardDescription>
       </CardHeader>

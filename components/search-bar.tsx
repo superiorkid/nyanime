@@ -30,7 +30,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="relative w-[354px] h-10 flex flex-col">
+      <div className="relative w-[172px] lg:w-[354px] h-10 flex flex-col z-50">
         <div className="relative h-10 z-10 rounded-md">
           <Input
             className="absolute inset-0 h-full pl-14 placeholder:text-background bg-transparent focus-visible:ring-0 focus-visible:outline-none text-background border-zinc-400"
@@ -50,7 +50,7 @@ const SearchBar = () => {
       </div>
 
       {debouncedSearchTerm && (
-        <div className="absolute pt-64 h-[430px] w-[400px] z-50">
+        <div className="absolute pt-64 h-[430px] max-w-fit -ml-20 z-30">
           <Card>
             <CardContent className="p-3">
               <div className="flex flex-col space-y-1.5">
