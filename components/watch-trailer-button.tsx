@@ -18,7 +18,7 @@ const WatchTrailerButton = ({ url }: WatchTrailerButtonProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="absolute lg:right-20 right-5 bottom-5 z-50 font-medium"
+          className="absolute lg:right-20 right-5 bottom-5 z-10 font-medium"
           size="lg"
           variant="secondary"
         >

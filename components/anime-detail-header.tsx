@@ -1,6 +1,6 @@
 import ChangeStatus from "@/components/change-status";
 import { AnimeStatus, Prisma } from "@prisma/client";
-import { Bookmark, Check, Dna, Eye, Star } from "lucide-react";
+import { Bookmark, Check, Eye, Star } from "lucide-react";
 import Image from "next/image";
 
 interface AnimeDetailHeaderProps {

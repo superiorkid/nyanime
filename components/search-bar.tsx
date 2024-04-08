@@ -3,11 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import SearchResultCard from "@/components/search-result-card";
 import { Data } from "@/types/AnimeSearch";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import SearchResultCard from "./search-result-card";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -37,6 +37,11 @@ const SearchBar = () => {
             placeholder="Search"
             onChange={(event) => setSearchTerm(event.target.value)}
             value={searchTerm}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setSearchTerm("");
+              }
+            }}
           />
           <Button
             className="absolute left-0 inset-y-0 h-full rounded-r-none bg-transparent"

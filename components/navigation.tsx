@@ -5,9 +5,8 @@ import { cn } from "@/lib/utils";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import SearchBar from "@/components/search-bar";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import UserButton from "@/components/user-button";
-import { AlignRight } from "lucide-react";
 import MobileMenu from "@/components/mobile-menu";
 
 interface NavigationProps {

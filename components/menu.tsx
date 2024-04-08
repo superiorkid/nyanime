@@ -4,13 +4,13 @@ import useMenu from "@/hooks/useMenu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { buttonVariants } from "./ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 const Menu = () => {
   const menus = useMenu();
 
   return (
-    <nav className="flex space-x-2 z-50">
+    <nav className="flex space-x-2">
       {menus.map(({ href, isActive, label }, index) => (
         <Link
           key={index}
@@ -20,7 +20,7 @@ const Menu = () => {
               variant: "ghost",
               size: "lg",
               className: cn(
-                "px-1.5 text-lg font-normal hover:bg-transparent hover:font-medium hover:text-background",
+                "px-1.5 text-lg font-normal hover:bg-transparent hover:font-medium hover:text-background z-50",
                 isActive && "font-medium"
               ),
             })
